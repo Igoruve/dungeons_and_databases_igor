@@ -7,26 +7,22 @@ const router = Router();
 //obtenemos todos los usuarios
 router.get("/", userAPIController.getAll);
 
-//obtenemos un usuario  
+//obtenemos las notas de un usuario
+router.get("/:id/notes", notesAPIController.getByID);
+
+//obtenemos un usuario
 router.get("/:id", userAPIController.getByID);
 
 //creamos un usuario
 router.post("/", userAPIController.create);
 
-// //actualizamos un usuario  
+// //actualizamos un usuario
 // router.put("/:id", userAPIController.update);
 
-//borramos un usuario  
+//borramos un usuario
 router.delete("/:id", userAPIController.remove);
 
-//obtenemos las notas de un usuario  
-router.get("/:id/notes", notesAPIController.getByID);
-
-// //obtenemos los personajes de un usuario  
+// //obtenemos los personajes de un usuario
 // router.get("/:id/characters", characterAPIController.getByUserID);
-
-
-
-
 
 export default router;

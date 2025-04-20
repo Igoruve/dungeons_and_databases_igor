@@ -17,7 +17,7 @@ async function getAll(req, res) {
     res.json(user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: error });
   }
 }
 

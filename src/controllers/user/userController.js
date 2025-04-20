@@ -11,7 +11,7 @@ async function GetAll() {
   return user;
 }
 
-async function Create(data) { 
+async function Create(data) {
   const result = await userModel.create(data);
   return result;
 }

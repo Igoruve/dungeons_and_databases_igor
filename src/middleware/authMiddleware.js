@@ -1,35 +1,32 @@
 import { verifyToken } from "../utils/token.js";
 
-function isLoggedInSession(req,res,next){
-    const user  = req.session.user;
-    if(!user){
-        return res.redirect("/login?error=You+are+not+logged+in")
-    }
+function isLoggedInSession(req, res, next) {
+  const user = req.session.user;
+  if (!user) {
+    return res.redirect("/login?error=You+are+not+logged+in");
+  }
+  next();
+}
+function isLoggedInAPI(req, res, next) {
+  const authorization = req.headers.authorization;
+  console.log("authorization", authorization);
+  if (!authorization) {
+    res.status(401).json({ error: "Unauthorized" });
+  }
+  let token = authorization.split(" ");
+  token = token.pop();
+  const result = verifyToken(token);
+  console.log("token verified", result);
+  if (result) {
+    req.user = {
+      user_id: result.user_id,
+      role: result.role,
+    };
     next();
-}
-function isLoggedInAPI(req,res,next){
-    const authorization  = req.headers.authorization;
-    console.log("authorization",authorization);
-    if(!authorization){
-        res.status(401).json({error:"Unauthorized"});
-    }
-    let token = authorization.split(" "); 
-    token = token.pop();
-    const result = verifyToken(token);
-    console.log("token verified",result);
-    if(result){
-        req.user = {
-            user_id: result.user_id,
-            role: result.role
-        }
-        next();
-    }else{
-        res.status(401).json({error:"Unauthorized"});
-    }
+  } else {
+    res.status(401).json({ error: "Unauthorized" });
+    return false;
+  }
 }
 
-
-export {
-    isLoggedInSession,
-    isLoggedInAPI
-}
+export { isLoggedInSession, isLoggedInAPI };
