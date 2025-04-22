@@ -1,5 +1,6 @@
 import { Router } from "express";
 import notesAPIController from "../../controllers/notes/notesAPIController.js";
+import { isLoggedInAPI } from "../../middleware/authMiddleware.js";
 
 const router = Router();
 
@@ -9,5 +10,13 @@ router.get("/", notesAPIController.getAll);
 //obtenemos una nota
 router.get("/:id", notesAPIController.getByID);
 
+//creamos una nota
+router.post("/", isLoggedInAPI, notesAPIController.create);
+
+//actualizamos una nota
+router.put("/:id", isLoggedInAPI, notesAPIController.edit);
+
+//borramos una nota
+router.delete("/:id", isLoggedInAPI, notesAPIController.remove);
 
 export default router;

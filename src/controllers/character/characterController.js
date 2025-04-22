@@ -25,8 +25,8 @@ async function Create(data) {
 }
 
 async function Edit(id, data) {
-  const note = await characterModel.findByPk(id);
-  const result = await note.update(data, {
+  const character = await characterModel.findByPk(id);
+  const result = await character.update(data, {
     where: {
       character_id: id,
     },

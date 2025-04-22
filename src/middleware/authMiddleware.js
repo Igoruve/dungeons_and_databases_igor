@@ -7,6 +7,7 @@ function isLoggedInSession(req, res, next) {
   }
   next();
 }
+
 function isLoggedInAPI(req, res, next) {
   const authorization = req.headers.authorization;
   console.log("authorization", authorization);
@@ -29,4 +30,19 @@ function isLoggedInAPI(req, res, next) {
   }
 }
 
-export { isLoggedInSession, isLoggedInAPI };
+function isMaster(req, res, next) {
+  if (req.user.role !== "master") {
+    return res.status(403).json({ error: "Forbidden: Only masters allowed" });
+  }
+  next();
+}
+
+function isSameUser(req, res, next) {
+  if (parseInt(req.params.id) !== req.user.user_id) {
+    return res.status(403).json({ error: "Forbidden: You can only edit yourself" });
+  }
+  next();
+}
+
+
+export { isLoggedInSession, isLoggedInAPI, isMaster, isSameUser };

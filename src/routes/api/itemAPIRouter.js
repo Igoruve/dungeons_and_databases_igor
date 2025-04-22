@@ -1,24 +1,22 @@
 import { Router } from "express";
 import itemAPIController from "../../controllers/item/itemAPIController.js";
+import { isLoggedInAPI, isMaster } from "../../middleware/authMiddleware.js";
 
 const router = Router();
 
-//obtenemos todos los usuarios
+//obtenemos todos los objetos
 router.get("/", itemAPIController.getAll);
 
-//obtenemos un usuario
+//obtenemos un objeto
 router.get("/:id", itemAPIController.getByID);
 
-//creamos un usuario
-router.post("/", itemAPIController.create);
+//creamos un objeto
+router.post("/", isLoggedInAPI, isMaster, itemAPIController.create);
 
-//actualizamos un usuario
-router.put("/:id", itemAPIController.edit);
+//actualizamos un objeto
+router.put("/:id", isLoggedInAPI, isMaster, itemAPIController.edit);
 
-//borramos un usuario
-router.delete("/:id", itemAPIController.remove);
-
-// //obtenemos los personajes de un usuario
-// router.get("/:id/characters", characterAPIController.getByitemID);
+//borramos un objeto
+router.delete("/:id", isLoggedInAPI, isMaster, itemAPIController.remove);
 
 export default router;

@@ -14,4 +14,4 @@ function verifyToken(token) {
   return result;
 }
 
-export default { createToken, verifyToken };
+export { createToken, verifyToken };

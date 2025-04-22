@@ -17,7 +17,7 @@ async function Create(data) {
 }
 
 async function Edit(id, data) {
-  const userRole = ["customer", "seller"];
+  const userRole = ["player", "master"];
   if (data.role) {
     data.role = data.role.toLowerCase();
     if (!userRole.includes(data.role)) {
