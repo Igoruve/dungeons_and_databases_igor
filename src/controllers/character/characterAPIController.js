@@ -21,6 +21,17 @@ async function getAll(req, res) {
   }
 }
 
+async function getByUserID(req, res) {
+  try {
+    const userId = req.params.id;
+    const character = await characterController.GetByUserID(userId);
+    res.json(character);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
 async function create(req, res) {
   try {
     const response = await characterController.Create(req.body);
@@ -64,6 +75,7 @@ async function remove(req, res) {
 export default {
   getAll,
   getByID,
+  getByUserID,
   create,
   edit,
   remove,

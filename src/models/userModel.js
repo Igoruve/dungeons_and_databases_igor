@@ -40,10 +40,6 @@ const User = connection.define(
       defaultValue: new Date(),
       allowNull: false,
     },
-    character_id: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-    },
   },
   { freezeTableName: true, tableName: "user" }
 );

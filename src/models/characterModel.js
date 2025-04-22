@@ -46,39 +46,24 @@ const Character = connection.define("character", {
   },
   appereance: {
     type: DataTypes.TEXT,
-    allowNull: true, 
+    allowNull: true,
   },
   lore: {
     type: DataTypes.TEXT,
-    allowNull: true, 
+    allowNull: true,
   },
   personality: {
     type: DataTypes.TEXT,
     allowNull: true,
   },
+  user_id: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    references: {
+      model: "user",
+      key: "user_id",
+    },
+  },
 });
-
-
-Character.associate = (models) => {
-  Character.belongsTo(models.Money, {
-    foreignKey: 'money_id',
-    as: 'money',
-  });
-
-  Character.belongsTo(models.Stats, {
-    foreignKey: 'stats_id',
-    as: 'stats',
-  });
-
-  Character.belongsTo(models.Species, {
-    foreignKey: 'species_id',
-    as: 'species',
-  });
-
-  Character.belongsTo(models.Class, {
-    foreignKey: 'class_id',
-    as: 'class',
-  });
-};
 
 export default Character;

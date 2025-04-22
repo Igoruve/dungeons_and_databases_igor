@@ -46,35 +46,6 @@ CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`stats` (
 ) ENGINE = InnoDB;
 
 
-DROP TABLE IF EXISTS `dungeons_and_databases`.`species_feature` ;
-
-CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`species_feature` (
-  `species_feature_id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `description` TEXT NOT NULL,
-  PRIMARY KEY (`species_feature_id`)
-  ) ENGINE = InnoDB;
-
-
-DROP TABLE IF EXISTS `dungeons_and_databases`.`species` ;
-
-CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`species` (
-  `species_id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `creature_type` VARCHAR(45) NOT NULL,
-  `size` ENUM("small", "medium") NOT NULL,
-  `speed` INT NOT NULL,
-  `darkvision` TINYINT NOT NULL,
-  `species_feature_id` INT NOT NULL,
-  PRIMARY KEY (`species_id`),
-  INDEX `fk_species_species_feature1_idx` (`species_feature_id` ASC) VISIBLE,
-  CONSTRAINT `fk_species_species_feature1`
-    FOREIGN KEY (`species_feature_id`)
-    REFERENCES `dungeons_and_databases`.`species_feature` (`species_feature_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
 
 DROP TABLE IF EXISTS `dungeons_and_databases`.`class_feature` ;
 
@@ -130,27 +101,62 @@ ENGINE = InnoDB;
 
 
 
--- -----------------------------------------------------
--- Table `dungeons_and_databases`.`item`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `dungeons_and_databases`.`item` ;
+DROP TABLE IF EXISTS `dungeons_and_databases`.`user`;
 
-CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`item` (
-  `item_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
+CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`user` (
+  `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(128) NOT NULL,
+  `password` VARCHAR(80) NOT NULL,
+  `created_at` DATETIME NOT NULL,
+  `first_name` VARCHAR(128) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  `role` ENUM("player", "master") NOT NULL,
+  `nickname` VARCHAR(128) NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
+  UNIQUE INDEX `nickname_UNIQUE` (`nickname` ASC)
+) ENGINE = InnoDB;
+
+
+
+DROP TABLE IF EXISTS `dungeons_and_databases`.`notes`;
+
+CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`notes` (
+  `notes_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(128) NOT NULL,
   `description` TEXT NOT NULL,
-  `value` INT NOT NULL,
-  `type` ENUM("weapon", "consumable", "armor", "tool", "wondrous", "instrument", "staff") NOT NULL,
-  `quantity` INT NOT NULL DEFAULT 1,
-  `rarity` ENUM("common", "uncommon", "rare", "very rare", "legendary", "artifact") NOT NULL,
-  `magic` TINYINT NULL DEFAULT 0,
-  PRIMARY KEY (`item_id`))
-ENGINE = InnoDB;
+  `created_at` DATETIME NULL,
+  `user_id` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`notes_id`),
+  INDEX `fk_notes_user1_idx` (`user_id` ASC) VISIBLE,
+  CONSTRAINT `fk_notes_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `dungeons_and_databases`.`user` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+) ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `dungeons_and_databases`.`character`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `dungeons_and_databases`.`character` ;
+
+
+DROP TABLE IF EXISTS `dungeons_and_databases`.`user_has_notes`;
+
+CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`user_has_notes` (
+  `user_id` INT UNSIGNED NOT NULL,
+  `notes_id` INT UNSIGNED NOT NULL,  -- Change this to UNSIGNED
+  PRIMARY KEY (`user_id`, `notes_id`),
+  INDEX `fk_user_has_notes_user1_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_user_has_notes_notes1_idx` (`notes_id` ASC) VISIBLE,
+  CONSTRAINT `fk_user_has_notes_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `dungeons_and_databases`.`user` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_notes_notes1`
+    FOREIGN KEY (`notes_id`)
+    REFERENCES `dungeons_and_databases`.`notes` (`notes_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+) ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`character` (
   `character_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -166,33 +172,76 @@ CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`character` (
   `appereance` TEXT NULL,
   `lore` TEXT NULL,
   `personality` TEXT NULL,
+  `user_id` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`character_id`),
-  INDEX `fk_character_money1_idx` (`money_id` ASC) VISIBLE,
-  INDEX `fk_character_stats1_idx` (`stats_id` ASC) VISIBLE,
-  INDEX `fk_character_species1_idx` (`species_id` ASC) VISIBLE,
-  INDEX `fk_character_classes1_idx` (`class_id` ASC) VISIBLE,
-  CONSTRAINT `fk_character_money1`
-    FOREIGN KEY (`money_id`)
-    REFERENCES `dungeons_and_databases`.`money` (`money_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_character_stats1`
-    FOREIGN KEY (`stats_id`)
-    REFERENCES `dungeons_and_databases`.`stats` (`stats_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_character_species1`
-    FOREIGN KEY (`species_id`)
-    REFERENCES `dungeons_and_databases`.`species` (`species_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_character_classes1`
-    FOREIGN KEY (`class_id`)
-    REFERENCES `dungeons_and_databases`.`class` (`class_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  INDEX `fk_character_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_character_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `dungeons_and_databases`.`user` (`user_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
 ENGINE = InnoDB;
 
+
+DROP TABLE IF EXISTS `dungeons_and_databases`.`species_feature` ;
+
+CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`species_feature` (
+  `species_feature_id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `description` TEXT NOT NULL,
+  PRIMARY KEY (`species_feature_id`)
+  ) ENGINE = InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`species` (
+  `species_id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `creature_type` VARCHAR(45) NOT NULL,
+  `size` ENUM("small", "medium") NOT NULL,
+  `speed` INT NOT NULL,
+  `darkvision` TINYINT NOT NULL,
+  `species_feature_id` INT NOT NULL,
+  `character_id` INT UNSIGNED,
+  PRIMARY KEY (`species_id`),
+  INDEX `fk_species_species_feature1_idx` (`species_feature_id` ASC) VISIBLE,
+  CONSTRAINT `fk_species_species_feature1`
+    FOREIGN KEY (`species_feature_id`)
+    REFERENCES `dungeons_and_databases`.`species_feature` (`species_feature_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,  -- <- Coma aquí
+  INDEX `fk_item_character_idx` (`character_id` ASC),
+  CONSTRAINT `fk_species_character`
+    FOREIGN KEY (`character_id`)
+    REFERENCES `dungeons_and_databases`.`character` (`character_id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE
+)
+ENGINE = InnoDB;
+
+
+
+DROP TABLE IF EXISTS `dungeons_and_databases`.`item`;
+
+CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`item` (
+  `item_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `description` TEXT NOT NULL,
+  `value` INT NOT NULL,
+  `type` ENUM("weapon", "consumable", "armor", "tool", "wondrous", "instrument", "staff") NOT NULL,
+  `quantity` INT NOT NULL DEFAULT 1,
+  `rarity` ENUM("common", "uncommon", "rare", "very rare", "legendary", "artifact") NOT NULL,
+  `magic` TINYINT NULL DEFAULT 0,
+  `character_id` INT UNSIGNED,
+  PRIMARY KEY (`item_id`),
+  INDEX `fk_item_character_idx` (`character_id` ASC),
+  CONSTRAINT `fk_item_character`
+    FOREIGN KEY (`character_id`)
+    REFERENCES `dungeons_and_databases`.`character` (`character_id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE
+)
+ENGINE = InnoDB;
 
 
 DROP TABLE IF EXISTS `dungeons_and_databases`.`character_has_class`;
@@ -352,72 +401,6 @@ CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`species_has_species_feature
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 ) ENGINE = InnoDB;
-
-
-DROP TABLE IF EXISTS `dungeons_and_databases`.`user` ;
-
-CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`user` (
-  `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(128) NOT NULL,
-  `password` VARCHAR(80) NOT NULL,
-  `created_at` DATETIME NOT NULL,
-  `first_name` VARCHAR(128) NOT NULL,
-  `last_name` VARCHAR(45) NOT NULL,
-  `role` ENUM("player", "master") NOT NULL,
-  `nickname` VARCHAR(128) NOT NULL,
-  `character_id` INT UNSIGNED NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
-  UNIQUE INDEX `nickname_UNIQUE` (`nickname` ASC) VISIBLE,
-  INDEX `fk_user_character1_idx` (`character_id` ASC) VISIBLE,
-  CONSTRAINT `fk_user_character1`
-    FOREIGN KEY (`character_id`)
-    REFERENCES `dungeons_and_databases`.`character` (`character_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
-DROP TABLE IF EXISTS `dungeons_and_databases`.`notes`;
-
-CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`notes` (
-  `notes_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` VARCHAR(128) NOT NULL,
-  `description` TEXT NOT NULL,
-  `created_at` DATETIME NULL,
-  `user_id` INT UNSIGNED NOT NULL,
-  PRIMARY KEY (`notes_id`),
-  INDEX `fk_notes_user1_idx` (`user_id` ASC) VISIBLE,
-  CONSTRAINT `fk_notes_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `dungeons_and_databases`.`user` (`user_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-) ENGINE = InnoDB;
-
-
-
-DROP TABLE IF EXISTS `dungeons_and_databases`.`user_has_notes`;
-
-CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`user_has_notes` (
-  `user_id` INT UNSIGNED NOT NULL,
-  `notes_id` INT UNSIGNED NOT NULL,  -- Change this to UNSIGNED
-  PRIMARY KEY (`user_id`, `notes_id`),
-  INDEX `fk_user_has_notes_user1_idx` (`user_id` ASC) VISIBLE,
-  INDEX `fk_user_has_notes_notes1_idx` (`notes_id` ASC) VISIBLE,
-  CONSTRAINT `fk_user_has_notes_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `dungeons_and_databases`.`user` (`user_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_user_has_notes_notes1`
-    FOREIGN KEY (`notes_id`)
-    REFERENCES `dungeons_and_databases`.`notes` (`notes_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
-) ENGINE = InnoDB;
-
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

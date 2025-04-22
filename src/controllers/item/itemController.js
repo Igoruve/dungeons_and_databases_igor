@@ -10,6 +10,15 @@ async function GetAll() {
   return item;
 }
 
+async function GetByCharacterID(id) {
+  const items = await Item.findAll({
+    where: {
+      character_id: id,
+    },
+  });
+  return items;
+}
+
 async function Create(data) {
   const result = await Item.create(data);
   return result;
@@ -37,6 +46,7 @@ async function Remove(id) {
 export default {
   GetByID,
   GetAll,
+  GetByCharacterID,
   Create,
   Edit,
   Remove,

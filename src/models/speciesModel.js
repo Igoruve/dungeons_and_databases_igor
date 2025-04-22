@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import connection from "../config/sequelize.js";
 
-const Item = connection.define("item", {
-  item_id: {
+const Species = connection.define("species", {
+  species_id: {
     type: DataTypes.INTEGER.UNSIGNED,
     allowNull: false,
     primaryKey: true,
@@ -12,46 +12,26 @@ const Item = connection.define("item", {
     type: DataTypes.STRING(45),
     allowNull: false,
   },
-  description: {
-    type: DataTypes.TEXT,
+  creature_type: {
+    type: DataTypes.STRING(45),
     allowNull: false,
   },
-  value: {
+  size: {
+    type: DataTypes.ENUM("small", "medium"),
+    allowNull: false,
+  },
+  speed: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  type: {
-    type: DataTypes.ENUM(
-      "weapon",
-      "consumable",
-      "armor",
-      "tool",
-      "wondrous",
-      "instrument",
-      "staff"
-    ),
-    allowNull: false,
-  },
-  quantity: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    defaultValue: 1,
-  },
-  rarity: {
-    type: DataTypes.ENUM(
-      "common",
-      "uncommon",
-      "rare",
-      "very rare",
-      "legendary",
-      "artifact"
-    ),
-    allowNull: false,
-  },
-  magic: {
+  darkvision: {
     type: DataTypes.TINYINT,
     allowNull: false,
     defaultValue: 0,
+  },
+  species_feature_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
   character_id: {
     type: DataTypes.INTEGER.UNSIGNED,
@@ -63,4 +43,4 @@ const Item = connection.define("item", {
   },
 });
 
-export default Item;
+export default Species;

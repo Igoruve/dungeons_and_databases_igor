@@ -10,6 +10,15 @@ async function GetAll() {
   return character;
 }
 
+async function GetByUserID(id) {
+  const character = await characterModel.findAll({
+    where: {
+      user_id: id,
+    },
+  });
+  return character;
+}
+
 async function Create(data) {
   const result = await characterModel.create(data);
   return result;
@@ -37,6 +46,7 @@ async function Remove(id) {
 export default {
   GetByID,
   GetAll,
+  GetByUserID,
   Create,
   Edit,
   Remove,

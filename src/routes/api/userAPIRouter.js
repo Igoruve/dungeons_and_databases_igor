@@ -1,6 +1,7 @@
 import { Router } from "express";
 import userAPIController from "../../controllers/user/userAPIController.js";
 import notesAPIController from "../../controllers/notes/notesAPIController.js";
+import characterAPIController from "../../controllers/character/characterAPIController.js";
 
 const router = Router();
 
@@ -9,6 +10,8 @@ router.get("/", userAPIController.getAll);
 
 //obtenemos las notas de un usuario
 router.get("/:id/notes", notesAPIController.getByUserID);
+
+router.get("/:id/character", characterAPIController.getByUserID);
 
 //obtenemos un usuario
 router.get("/:id", userAPIController.getByID);
