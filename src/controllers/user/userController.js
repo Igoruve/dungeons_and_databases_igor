@@ -1,18 +1,18 @@
 import { UserNameNotProvided, UserRoleIncorrect } from "../../utils/errors.js";
-import userModel from "../../models/userModel.js";
+import { User, Notes } from "../../models/index.js";
 
 async function GetByID(id) {
-  const user = await userModel.findByPk(id);
+  const user = await User.findByPk(id)
   return user;
 }
 
 async function GetAll() {
-  const user = await userModel.findAll();
+  const user = await User.findAll()
   return user;
 }
 
 async function Create(data) {
-  const result = await userModel.create(data);
+  const result = await User.create(data);
   return result;
 }
 
@@ -24,17 +24,17 @@ async function Edit(id, data) {
       throw new UserRoleIncorrect();
     }
   }
-  const result = await userModel.update(data, {
+  const result = await User.update(data, {
     where: {
       user_id: id,
     },
   });
-  const updatedUser = await userModel.findByPk(id);
+  const updatedUser = await User.findByPk(id);
   return updatedUser;
 }
 
 async function Remove(id) {
-  const result = await userModel.destroy({
+  const result = await User.destroy({
     where: {
       user_id: id,
     },

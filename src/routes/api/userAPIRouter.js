@@ -8,7 +8,7 @@ const router = Router();
 router.get("/", userAPIController.getAll);
 
 //obtenemos las notas de un usuario
-router.get("/:id/notes", notesAPIController.getByID);
+router.get("/:id/notes", notesAPIController.getByUserID);
 
 //obtenemos un usuario
 router.get("/:id", userAPIController.getByID);

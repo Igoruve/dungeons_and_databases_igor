@@ -13,7 +13,7 @@ router.get("/:id", notesAPIController.getByID);
 router.post("/", notesAPIController.create);
 
 //actualizamos una nota
-router.put("/:id", notesAPIController.update);
+router.put("/:id", notesAPIController.edit);
 
 //borramos una nota
 router.delete("/:id", notesAPIController.remove);

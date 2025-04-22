@@ -233,16 +233,6 @@ INSERT INTO `character_has_item` (character_id, item_id, quantity) VALUES
 (10, 8, 2),  -- Potion of Greater Healing
 (10, 15, 1); -- Staff of the Python
 
--- Notes
-INSERT INTO `notes` (notes_id, title, description) VALUES
-(1, 'The Ancient Tomb', 'The party will encounter a sealed tomb in the Whispering Woods. Inside: 3 guardian constructs (CR 3 each), a puzzle involving rotating mirrors to direct light, and a hidden chamber with a minor artifact. Need to prepare for Lilith attempting to disarm traps and Alaric wanting to study everything.'),
-(2, 'Campaign Villain Ideas', 'Lord Blackthorn - corrupt noble secretly working with a cult. Lady Vex - seemingly helpful merchant who is actually stealing life force for eternal youth. The Crimson Hand - assassin guild targeting the party for disrupting their operations. Need to drop subtle clues about their connection to each other.'),
-(3, 'Next Session Outline', 'Town of Millbrook celebration interrupted by mysterious disappearances. Clues point to old mill. Mill contains portal to shadow realm where victims are trapped. Boss encounter: Shadow Weaver who feeds on fear. Need atmospheric description of shadow realm - moving darkness, whispers, etc.'),
-(4, 'Thokk''s Battle Memories', 'Need to remember that goblin chieftain''s name - was it Griznuk? He owes me a rematch. That dragon''s scale would make good armor if I can find it'),
-(5, 'Lilith''s Heist Plans', 'Next target: Merchant Guild treasury. Security details: 2 guards rotate shifts every 4 hours, magical alarm on main door but not on cellar entrance. Need to acquire guard uniform from laundry. Remember to check for new traps - last time they added a pressure plate near the vault. Special target: the ruby necklace belonging to Guildmaster Voren (corrupt official who''s been taxing poor district unfairly).'),
-(6, 'Alaric''s Research Journal', 'Fascinating discovery in the ancient text from Highpeak Library. References to a "Confluence of Ley Lines" that occurs once every 273 years. Current calculations suggest next confluence is within 6 months. Effects unknown but possibly related to increased magical phenomena reported in eastern provinces. Must consult with Archmage Sylvia about potential amplification rituals. Note: Acquired rare components - moonstone powder, essence of midnight bloom. Still need phoenix tear.'),
-(7, 'Bramble''s Nature Observations', 'Signs of corruption spreading in Whispering Woods - trees with blackened leaves, animals avoiding northeast quadrant. Collected samples of affected soil and bark. Mushrooms growing in unnatural patterns forming what appears to be arcane symbols. Encountered friendly treant who warned of "shadow beneath roots." Cleansing ritual requires heartwood from ancient oak, pure spring water, and full moon. Must remember to check on the sapling from home grove - it''s not adapting well to the changing weather.');
-
 INSERT INTO `user` 
 (`user_id`, `email`, `password`, `created_at`, `first_name`, `last_name`, `role`, `nickname`, `character_id`) 
 VALUES 
@@ -251,6 +241,15 @@ VALUES
 (3, 'rogue.player@gmail.com', 'sneaky789', '2025-03-16 14:20:00', 'Sarah', 'Williams', 'player', 'ShadowDancer', 2),
 (4, 'wizard.player@gmail.com', 'fireball123', '2025-03-17 09:45:00', 'Thomas', 'Chen', 'player', 'SpellSeeker', 3),
 (5, 'druid.player@gmail.com', 'naturelover777', '2025-03-18 11:30:00', 'Emma', 'Garcia', 'player', 'WildShape', 10);
+
+INSERT INTO `notes` (notes_id, title, description, created_at, user_id) VALUES
+(1, 'The Ancient Tomb', 'The party will encounter a sealed tomb in the Whispering Woods...', '2025-03-15 18:30:00', 1),
+(2, 'Campaign Villain Ideas', 'Lord Blackthorn - corrupt noble secretly working with a cult...', '2025-03-16 10:15:00', 1),
+(3, 'Next Session Outline', 'Town of Millbrook celebration interrupted by mysterious disappearances...', '2025-03-16 14:20:00', 1),
+(4, 'Thokk''s Battle Memories', 'Need to remember that goblin chieftain''s name...', '2025-03-17 09:45:00', 2),
+(5, 'Lilith''s Heist Plans', 'Next target: Merchant Guild treasury...', '2025-03-18 11:30:00', 2),
+(6, 'Alaric''s Research Journal', 'Fascinating discovery in the ancient text from Highpeak Library...', '2025-03-19 13:30:00', 3),
+(7, 'Bramble''s Nature Observations', 'Signs of corruption spreading in Whispering Woods...', '2025-03-20 14:45:00', 4);
 
 -- Associate master user with notes
 INSERT INTO `user_has_notes` 

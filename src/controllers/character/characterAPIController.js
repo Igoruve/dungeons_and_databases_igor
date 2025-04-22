@@ -1,10 +1,10 @@
-import notesController from "./notesController.js";
+import characterController from "./characterController.js";
 
 async function getByID(req, res) {
   try {
     const id = req.params.id;
-    const notes = await notesController.GetByID(id);
-    res.json(notes);
+    const character = await characterController.GetByID(id);
+    res.json(character);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
@@ -13,19 +13,8 @@ async function getByID(req, res) {
 
 async function getAll(req, res) {
   try {
-    const notes = await notesController.GetAll();
-    res.json(notes);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error });
-  }
-}
-
-async function getByUserID(req, res) {
-  try {
-    const userId = req.params.id;
-    const notes = await notesController.GetByUserID(userId);
-    res.json(notes);
+    const character = await characterController.GetAll();
+    res.json(character);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
@@ -34,7 +23,7 @@ async function getByUserID(req, res) {
 
 async function create(req, res) {
   try {
-    const response = await notesController.Create(req.body);
+    const response = await characterController.Create(req.body);
     res.json(response);
   } catch (error) {
     console.error(error);
@@ -49,7 +38,7 @@ async function create(req, res) {
 async function edit(req, res) {
   try {
     const id = req.params.id;
-    const response = await notesController.Edit(id, req.body);
+    const response = await characterController.Edit(id, req.body);
     res.json(response);
   } catch (error) {
     console.error(error);
@@ -64,7 +53,7 @@ async function edit(req, res) {
 async function remove(req, res) {
   try {
     const id = req.params.id;
-    const response = await notesController.Remove(id);
+    const response = await characterController.Remove(id);
     res.json(response);
   } catch (error) {
     console.error(error);
@@ -75,7 +64,6 @@ async function remove(req, res) {
 export default {
   getAll,
   getByID,
-  getByUserID,
   create,
   edit,
   remove,

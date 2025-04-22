@@ -10,6 +10,15 @@ async function GetAll() {
   return notes;
 }
 
+async function GetByUserID(id) {
+  const notes = await notesModel.findAll({
+    where: {
+      user_id: id,
+    },
+  });
+  return notes;
+}
+
 async function Create(data) {
   const result = await notesModel.create(data);
   return result;
@@ -37,6 +46,7 @@ async function Remove(id) {
 export default {
   GetByID,
   GetAll,
+  GetByUserID,
   Create,
   Edit,
   Remove,

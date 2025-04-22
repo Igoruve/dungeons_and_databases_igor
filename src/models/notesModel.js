@@ -21,6 +21,14 @@ const Notes = connection.define("notes", {
     defaultValue: new Date(),
     allowNull: true,
   },
+  user_id: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    references: {
+      model: "user",
+      key: "user_id",
+    },
+  },
 });
 
 export default Notes;
