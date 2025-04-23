@@ -6,6 +6,7 @@ import Class from "./classModel.js";
 import Character from "./characterModel.js";
 import Species from "./speciesModel.js";
 import Stats from "./statsModel.js";
+import Money from "./moneyModel.js";
 
 User.hasMany(Notes, { foreignKey: "user_id", as: "notes" });
 
@@ -19,12 +20,19 @@ Character.hasMany(Item, { foreignKey: "character_id", as: "item" });
 
 Item.belongsTo(Character, { foreignKey: "character_id", as: "character" });
 
-Character.hasMany(Species, { foreignKey: "character_id", as: "species" });
+Character.belongsTo(Species, { foreignKey: "species_id", as: "species" });
+Character.belongsTo(Stats, { foreignKey: "stats_id", as: "stats" });
+Character.belongsTo(Class, { foreignKey: "class_id", as: "class" });
+Character.belongsTo(Money, { foreignKey: "money_id", as: "money" });
 
-Species.belongsTo(Character, { foreignKey: "character_id", as: "character" });
-
-Character.hasMany(Stats, { foreignKey: "character_id", as: "stat" });
-
-Stats.belongsTo(Character, { foreignKey: "character_id", as: "character" });
-
-export { connection, User, Notes, Item, Class, Species, Stats };
+export {
+  connection,
+  User,
+  Notes,
+  Item,
+  Class,
+  Character,
+  Species,
+  Stats,
+  Money,
+};

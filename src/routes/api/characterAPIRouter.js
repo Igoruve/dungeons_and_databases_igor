@@ -1,14 +1,18 @@
 import { Router } from "express";
+import { isLoggedInAPI } from "../../middleware/authMiddleware.js";
 import characterAPIController from "../../controllers/character/characterAPIController.js";
 import itemAPIController from "../../controllers/item/itemAPIController.js";
 import statsAPIController from "../../controllers/stats/statsAPIController.js";
 import speciesAPIController from "../../controllers/species/speciesAPIController.js";
-import { isLoggedInAPI } from "../../middleware/authMiddleware.js";
+import moneyAPIController from "../../controllers/money/moneyAPIController.js";
 
 const router = Router();
 
 //obtenemos todos los personajes
 router.get("/", characterAPIController.getAll);
+
+//obtenemos el dinero de un personaje
+router.get("/:id/money", moneyAPIController.getByCharacterID);
 
 //obtenemos las stats de un personaje
 router.get("/:id/stats", statsAPIController.getByCharacterID);

@@ -7,6 +7,7 @@ import classAPIRouter from "./classAPIRouter.js";
 import speciesAPIRouter from "./speciesAPIRouter.js";
 import authAPIRouter from "./authAPIRouter.js";
 import statsAPIRouter from "./statsAPIRouter.js";
+import moneyAPIRouter from "./moneyAPIRouter.js";
 import notesAPIController from "../../controllers/notes/notesAPIController.js";
 import characterAPIController from "../../controllers/character/characterAPIController.js";
 
@@ -16,6 +17,7 @@ router.get("/", (req, res) => {
   res.send("Welcome friends!");
 });
 
+router.use("/money", moneyAPIRouter);
 router.use("/stats", statsAPIRouter);
 router.use("/species", speciesAPIRouter);
 router.use("/class", classAPIRouter);

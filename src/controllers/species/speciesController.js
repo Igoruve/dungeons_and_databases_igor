@@ -1,12 +1,20 @@
 import { Species } from "../../models/index.js";
 
 async function GetByID(id) {
-  const species = await Species.findByPk(id);
+  const species = await Species.findByPk(id, {
+    attributes: {
+      exclude: ["species_id", "character_id", "species_feature_id"],
+    },
+  });
   return species;
 }
 
 async function GetAll() {
-  const species = await Species.findAll();
+  const species = await Species.findAll({
+    attributes: {
+      exclude: ["character_id", "species_feature_id"],
+    },
+  });
   return species;
 }
 
@@ -14,6 +22,9 @@ async function GetByCharacterID(id) {
   const species = await Species.findAll({
     where: {
       character_id: id,
+    },
+    attributes: {
+      exclude: ["character_id", "species_id", "species_feature_id"],
     },
   });
   return species;

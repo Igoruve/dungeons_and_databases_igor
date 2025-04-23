@@ -19,25 +19,6 @@ CREATE SCHEMA IF NOT EXISTS `dungeons_and_databases` DEFAULT CHARACTER SET utf8 
 USE `dungeons_and_databases` ;
 
 
-DROP TABLE IF EXISTS `dungeons_and_databases`.`money` ;
-
-CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`money` (
-  `money_id` BIGINT NOT NULL DEFAULT 0,
-  `platinum` BIGINT NULL DEFAULT 0,
-  `gold` BIGINT NULL DEFAULT 0,
-  `silver` BIGINT NULL DEFAULT 0,
-  `copper` BIGINT NULL DEFAULT 0,
-  PRIMARY KEY (`money_id`))
-ENGINE = InnoDB;
-
-
-
-DROP TABLE IF EXISTS `dungeons_and_databases`.`stats` ;
-
-
-
-
-
 DROP TABLE IF EXISTS `dungeons_and_databases`.`class_feature` ;
 
 CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`class_feature` (
@@ -174,6 +155,23 @@ CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`character` (
 )
 ENGINE = InnoDB;
 
+DROP TABLE IF EXISTS `dungeons_and_databases`.`money` ;
+
+CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`money` (
+  `money_id` BIGINT NOT NULL,
+  `platinum` BIGINT NULL DEFAULT 0,
+  `gold` BIGINT NULL DEFAULT 0,
+  `silver` BIGINT NULL DEFAULT 0,
+  `copper` BIGINT NULL DEFAULT 0,
+  `character_id` INT UNSIGNED,  
+  PRIMARY KEY (`money_id`),
+  	INDEX `fk_money_character_idx` (`character_id` ASC),
+  CONSTRAINT `fk_money_character`
+    FOREIGN KEY (`character_id`)
+    REFERENCES `dungeons_and_databases`.`character` (`character_id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)  
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`stats` (
   `stats_id` INT NOT NULL AUTO_INCREMENT,
@@ -185,8 +183,8 @@ CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`stats` (
   `Wisdom` INT NOT NULL,
   `character_id` INT UNSIGNED,
 	PRIMARY KEY (`stats_id`),
-	INDEX `fk_item_character_idx` (`character_id` ASC),
-  CONSTRAINT `fk_species_character`
+	INDEX `fk_stats_character_idx` (`character_id` ASC),
+  CONSTRAINT `fk_stats_character`
     FOREIGN KEY (`character_id`)
     REFERENCES `dungeons_and_databases`.`character` (`character_id`)
     ON DELETE SET NULL

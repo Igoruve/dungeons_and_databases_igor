@@ -46,19 +46,6 @@ INSERT INTO skill (skill_id, name, description, associated_stat) VALUES
 (18, 'Survival', 'The GM might ask you to make a Wisdom (Survival) check to follow tracks, hunt wild game, guide your group through frozen wastelands, identify signs that owlbears live nearby, predict the weather, or avoid quicksand and other natural hazards.', 'WIS');
 
 
--- Money
-INSERT INTO money (money_id, platinum, gold, silver, copper) VALUES
-(1, 0, 10, 5, 20), -- Starting money for level 1 characters
-(2, 0, 15, 10, 50),
-(3, 0, 25, 15, 10),
-(4, 0, 20, 8, 30),
-(5, 0, -2, 20, 12),
-(6, 1, 50, 25, 40), -- More money for level 5 characters
-(7, 2, 75, 30, 15),
-(8, 3, 120, 40, 25),
-(9, 2, 85, 15, 30),
-(10, 1, 65, 35, 50);
-
 
 INSERT INTO `user` 
 (`user_id`, `email`, `password`, `created_at`, `first_name`, `last_name`, `role`, `nickname`) 
@@ -105,7 +92,18 @@ VALUES
 (9, 'Gareth', 'Lightbringer', 33, 'Lawful Good', 5, 9, 10, 1, 4, 'Now bears a scar across his face from a demon''s claw, which glows faintly when he uses his divine powers. His armor is enhanced with holy runes.', 'After witnessing corruption within his own religious order, Gareth underwent a crisis of faith before establishing his own small temple dedicated to true justice and compassion rather than rigid dogma.', 'Still devoted to good but now understands the complexities of morality. He judges less and listens more, though he remains unwavering against true evil.', 4),
 (10, 'Bramble', 'Oakenheart', 150, 'True Neutral', 5, 10, 6, 2, 6, 'A wood elf with bark-like skin and hair that changes with the seasons. Small flowers sometimes bloom in her hair when she''s happy.', 'Once the guardian of a sacred grove that was corrupted by dark magic, Bramble travels to cleanse natural sites and restore balance. She carries a seedling from her fallen grove, seeking a new home for it.', 'Deeply connected to nature and sometimes struggles to understand "civilized" customs. She is slow to anger but fierce when protecting the natural world.', 5);
 
-
+-- Money
+INSERT INTO money (money_id, platinum, gold, silver, copper, character_id) VALUES
+(1, 0, 10, 5, 20, 1), -- Starting money for level 1 characters
+(2, 0, 15, 10, 50, 2),
+(3, 0, 25, 15, 10, 3),
+(4, 0, 20, 8, 30, 4),
+(5, 0, -2, 20, 12, 5),
+(6, 1, 50, 25, 40, 6), -- More money for level 5 characters
+(7, 2, 75, 30, 15, 7),
+(8, 3, 120, 40, 25, 8),
+(9, 2, 85, 15, 30, 9),
+(10, 1, 65, 35, 50, 10);
 
 -- Stats
 INSERT INTO stats (stats_id, DEXTERITY, INTELLIGENCE, STRENGTH, CHARISMA, CONSTITUTION, WISDOM, character_id) 

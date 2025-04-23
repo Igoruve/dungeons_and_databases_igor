@@ -1,7 +1,11 @@
 import Stats from "../../models/statsModel.js";
 
 async function GetByID(id) {
-  const stats = await Stats.findByPk(id);
+  const stats = await Stats.findByPk(id, {
+    attributes: {
+      exclude: ["stats_id", "character_id"],
+    },
+  });
   return stats;
 }
 
@@ -14,6 +18,9 @@ async function GetByCharacterID(id) {
   const stats = await Stats.findAll({
     where: {
       character_id: id,
+    },
+    attributes: {
+      exclude: ["character_id"],
     },
   });
   return stats;

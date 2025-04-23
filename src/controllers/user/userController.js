@@ -1,13 +1,36 @@
 import { UserNameNotProvided, UserRoleIncorrect } from "../../utils/errors.js";
 import { User, Notes } from "../../models/index.js";
+import Character from "../../models/characterModel.js";
 
 async function GetByID(id) {
-  const user = await User.findByPk(id)
+  const user = await User.findByPk(id, {
+    attributes: {
+      exclude: ["user_id", "password"],
+    },
+    include: [
+      {
+        model: Notes,
+        as: "notes",
+        attributes: { exclude: ["notes_id", "user_id", "created_at"] },
+      },
+    ],
+  });
   return user;
 }
 
 async function GetAll() {
-  const user = await User.findAll()
+  const user = await User.findAll({
+    attributes: {
+      exclude: ["password"],
+    },
+    include: [
+      {
+        model: Notes,
+        as: "notes",
+        attributes: { exclude: ["notes_id", "user_id", "created_at"] },
+      },
+    ],
+  });
   return user;
 }
 

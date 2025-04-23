@@ -1,7 +1,11 @@
 import { Item } from "../../models/index.js";
 
 async function GetByID(id) {
-  const item = await Item.findByPk(id);
+  const item = await Item.findByPk(id, {
+    attributes: {
+      exclude: ["character_id", "item_id"],
+    },
+  });
   return item;
 }
 
@@ -14,6 +18,9 @@ async function GetByCharacterID(id) {
   const items = await Item.findAll({
     where: {
       character_id: id,
+    },
+    attributes: {
+      exclude: ["character_id", "item_id"],
     },
   });
   return items;

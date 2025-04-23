@@ -1,7 +1,11 @@
 import notesModel from "../../models/notesModel.js";
 
 async function GetByID(id) {
-  const notes = await notesModel.findByPk(id);
+  const notes = await notesModel.findByPk(id, {
+    attributes: {
+      exclude: ["notes_id", "user_id"],
+    },
+  });
   return notes;
 }
 
@@ -14,6 +18,9 @@ async function GetByUserID(id) {
   const notes = await notesModel.findAll({
     where: {
       user_id: id,
+    },
+    attributes: {
+      exclude: ["user_id"],
     },
   });
   return notes;
