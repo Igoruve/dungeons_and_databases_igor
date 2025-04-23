@@ -1,6 +1,7 @@
 import { Router } from "express";
 import characterAPIController from "../../controllers/character/characterAPIController.js";
 import itemAPIController from "../../controllers/item/itemAPIController.js";
+import statsAPIController from "../../controllers/stats/statsAPIController.js";
 import speciesAPIController from "../../controllers/species/speciesAPIController.js";
 import { isLoggedInAPI } from "../../middleware/authMiddleware.js";
 
@@ -8,6 +9,9 @@ const router = Router();
 
 //obtenemos todos los personajes
 router.get("/", characterAPIController.getAll);
+
+//obtenemos las stats de un personaje
+router.get("/:id/stats", statsAPIController.getByCharacterID);
 
 //obtenemos los items de un personaje
 router.get("/:id/item", itemAPIController.getByCharacterID);

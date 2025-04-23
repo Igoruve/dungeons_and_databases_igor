@@ -46,21 +46,6 @@ INSERT INTO skill (skill_id, name, description, associated_stat) VALUES
 (18, 'Survival', 'The GM might ask you to make a Wisdom (Survival) check to follow tracks, hunt wild game, guide your group through frozen wastelands, identify signs that owlbears live nearby, predict the weather, or avoid quicksand and other natural hazards.', 'WIS');
 
 
--- Stats
-INSERT INTO stats (stats_id, DEXTERITY, INTELLIGENCE, STRENGTH, CHARISMA, CONSTITUTION, WISDOM) 
-VALUES
-(1, 12, 8, 16, 10, 14, 13),
-(2, 16, 14, 10, 12, 10, 8),
-(3, 10, 16, 8, 14, 12, 13),
-(4, 10, 12, 16, 14, 12, 8),
-(5, 14, 10, 8, 16, 12, 13),
-(6, 14, 12, 10, 8, 14, 16),
-(7, 14, 10, 15, 8, 16, 12),
-(8, 18, 14, 10, 12, 12, 8),
-(9, 12, 18, 8, 16, 10, 14),
-(10, 12, 10, 18, 16, 14, 8);
-
-
 -- Money
 INSERT INTO money (money_id, platinum, gold, silver, copper) VALUES
 (1, 0, 10, 5, 20), -- Starting money for level 1 characters
@@ -78,11 +63,11 @@ INSERT INTO money (money_id, platinum, gold, silver, copper) VALUES
 INSERT INTO `user` 
 (`user_id`, `email`, `password`, `created_at`, `first_name`, `last_name`, `role`, `nickname`) 
 VALUES 
-(1, 'dungeon.master@gmail.com', 'password123', '2025-03-15 18:30:00', 'Morgan', 'Blackwood', 'master', 'ArchMage'),
-(2, 'barbarian.player@gmail.com', 'axeswing456', '2025-03-16 10:15:00', 'Mike', 'Johnson', 'player', 'MountainCrusher'),
-(3, 'rogue.player@gmail.com', 'sneaky789', '2025-03-16 14:20:00', 'Sarah', 'Williams', 'player', 'ShadowDancer'),
-(4, 'wizard.player@gmail.com', 'fireball123', '2025-03-17 09:45:00', 'Thomas', 'Chen', 'player', 'SpellSeeker'),
-(5, 'druid.player@gmail.com', 'naturelover777', '2025-03-18 11:30:00', 'Emma', 'Garcia', 'player', 'WildShape');
+(1, 'dungeon.master@gmail.com', '$2b$10$3hlItH6DsK5FMGuhhgsGj.IivU6zHhKREr5o3X4V72qnHoq44NLBK', '2025-03-15 18:30:00', 'Morgan', 'Blackwood', 'master', 'ArchMage'),
+(2, 'barbarian.player@gmail.com', '$2b$10$3hlItH6DsK5FMGuhhgsGj.IivU6zHhKREr5o3X4V72qnHoq44NLBK', '2025-03-16 10:15:00', 'Mike', 'Johnson', 'player', 'MountainCrusher'),
+(3, 'rogue.player@gmail.com', '$2b$10$3hlItH6DsK5FMGuhhgsGj.IivU6zHhKREr5o3X4V72qnHoq44NLBK', '2025-03-16 14:20:00', 'Sarah', 'Williams', 'player', 'ShadowDancer'),
+(4, 'wizard.player@gmail.com', '$2b$10$3hlItH6DsK5FMGuhhgsGj.IivU6zHhKREr5o3X4V72qnHoq44NLBK', '2025-03-17 09:45:00', 'Thomas', 'Chen', 'player', 'SpellSeeker'),
+(5, 'druid.player@gmail.com', '$2b$10$3hlItH6DsK5FMGuhhgsGj.IivU6zHhKREr5o3X4V72qnHoq44NLBK', '2025-03-18 11:30:00', 'Emma', 'Garcia', 'player', 'WildShape');
 
 INSERT INTO `notes` (notes_id, title, description, created_at, user_id) VALUES
 (1, 'The Ancient Tomb', 'The party will encounter a sealed tomb in the Whispering Woods...', '2025-03-15 18:30:00', 1),
@@ -119,6 +104,23 @@ VALUES
 (8, 'Alaric', 'Spellweaver', 50, 'Neutral Good', 5, 8, 9, 1, 3, 'His white hair now reaches his waist, and his eyes occasionally glow with arcane energy. Mystical tattoos on his hands help channel his increasingly powerful spells.', 'Alaric discovered ancient texts hinting at a lost civilization of magic users. He studies relics and ruins, believing this forgotten knowledge could help prevent a prophesied magical catastrophe.', 'Still curious but more confident in his abilities. He has become more pragmatic, understanding that sometimes knowledge must be protected rather than freely shared when it could be dangerous.', 3),
 (9, 'Gareth', 'Lightbringer', 33, 'Lawful Good', 5, 9, 10, 1, 4, 'Now bears a scar across his face from a demon''s claw, which glows faintly when he uses his divine powers. His armor is enhanced with holy runes.', 'After witnessing corruption within his own religious order, Gareth underwent a crisis of faith before establishing his own small temple dedicated to true justice and compassion rather than rigid dogma.', 'Still devoted to good but now understands the complexities of morality. He judges less and listens more, though he remains unwavering against true evil.', 4),
 (10, 'Bramble', 'Oakenheart', 150, 'True Neutral', 5, 10, 6, 2, 6, 'A wood elf with bark-like skin and hair that changes with the seasons. Small flowers sometimes bloom in her hair when she''s happy.', 'Once the guardian of a sacred grove that was corrupted by dark magic, Bramble travels to cleanse natural sites and restore balance. She carries a seedling from her fallen grove, seeking a new home for it.', 'Deeply connected to nature and sometimes struggles to understand "civilized" customs. She is slow to anger but fierce when protecting the natural world.', 5);
+
+
+
+-- Stats
+INSERT INTO stats (stats_id, DEXTERITY, INTELLIGENCE, STRENGTH, CHARISMA, CONSTITUTION, WISDOM, character_id) 
+VALUES
+(1, 12, 8, 16, 10, 14, 13, 1),
+(2, 16, 14, 10, 12, 10, 8, 2),
+(3, 10, 16, 8, 14, 12, 13, 3),
+(4, 10, 12, 16, 14, 12, 8, 4),
+(5, 14, 10, 8, 16, 12, 13, 5),
+(6, 14, 12, 10, 8, 14, 16, 6),
+(7, 14, 10, 15, 8, 16, 12, 7),
+(8, 18, 14, 10, 12, 12, 8, 8),
+(9, 12, 18, 8, 16, 10, 14, 9),
+(10, 12, 10, 18, 16, 14, 8, 10);
+
 
 -- Items
 INSERT INTO item (item_id, name, description, value, type, quantity, rarity, magic, character_id) VALUES

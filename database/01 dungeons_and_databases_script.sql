@@ -34,16 +34,7 @@ ENGINE = InnoDB;
 
 DROP TABLE IF EXISTS `dungeons_and_databases`.`stats` ;
 
-CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`stats` (
-  `stats_id` INT NOT NULL AUTO_INCREMENT,
-  `Dexterity` INT NULL,
-  `Intelligence` INT NULL,
-  `Strength` INT NULL,
-  `Charisma` INT NULL,
-  `Constitution` INT NULL,
-  `Wisdom` INT NULL,
-  PRIMARY KEY (`stats_id`)
-) ENGINE = InnoDB;
+
 
 
 
@@ -184,6 +175,25 @@ CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`character` (
 ENGINE = InnoDB;
 
 
+CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`stats` (
+  `stats_id` INT NOT NULL AUTO_INCREMENT,
+  `Dexterity` INT NOT NULL,
+  `Intelligence` INT NOT NULL,
+  `Strength` INT NOT NULL,
+  `Charisma` INT NOT NULL,
+  `Constitution` INT NOT NULL,
+  `Wisdom` INT NOT NULL,
+  `character_id` INT UNSIGNED,
+	PRIMARY KEY (`stats_id`),
+	INDEX `fk_item_character_idx` (`character_id` ASC),
+  CONSTRAINT `fk_species_character`
+    FOREIGN KEY (`character_id`)
+    REFERENCES `dungeons_and_databases`.`character` (`character_id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE
+) ENGINE = InnoDB;
+
+
 DROP TABLE IF EXISTS `dungeons_and_databases`.`species_feature` ;
 
 CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`species_feature` (
@@ -209,9 +219,9 @@ CREATE TABLE IF NOT EXISTS `dungeons_and_databases`.`species` (
     FOREIGN KEY (`species_feature_id`)
     REFERENCES `dungeons_and_databases`.`species_feature` (`species_feature_id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,  -- <- Coma aquí
+    ON UPDATE NO ACTION,  
   INDEX `fk_item_character_idx` (`character_id` ASC),
-  CONSTRAINT `fk_species_character`
+  CONSTRAINT `fk_species_character_new`
     FOREIGN KEY (`character_id`)
     REFERENCES `dungeons_and_databases`.`character` (`character_id`)
     ON DELETE SET NULL
