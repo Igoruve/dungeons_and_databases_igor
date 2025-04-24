@@ -5,7 +5,7 @@ import Stats from "../../models/statsModel.js";
 import User from "../../models/userModel.js";
 import Item from "../../models/itemModel.js";
 import Money from "../../models/moneyModel.js";
-// import Skill from "../../models/skillModel.js";
+import Skill from "../../models/skillModel.js";
 
 async function GetByID(id) {
   const character = await characterModel.findByPk(id, {
@@ -41,12 +41,12 @@ async function GetByID(id) {
         as: "money",
         attributes: { exclude: ["money_id", "character_id"] },
       },
-      // {
-      //   model: Skill,
-      //   as: "skill", // Relación de muchos a muchos con Habilidades
-      //   attributes: ["name"],
-      //   through: { attributes: [] },
-      // },
+      {
+        model: Skill,
+        as: "skill", 
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
     ],
   });
   return character;
@@ -83,12 +83,12 @@ async function GetAll() {
         as: "money",
         attributes: { exclude: ["money_id", "character_id"] },
       },
-      // {
-      //   model: Skill,
-      //   as: "skill", // Relación con Habilidades
-      //   attributes: ["name"],
-      //   through: { attributes: [] },
-      // },
+      {
+        model: Skill,
+        as: "skill", 
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
     ],
   });
   return characters;
@@ -131,12 +131,12 @@ async function GetByUserID(id) {
         as: "money",
         attributes: { exclude: ["money_id", "character_id"] },
       },
-      // {
-      //   model: Skill,
-      //   as: "skill", // Relación con Habilidades
-      //   attributes: ["name"],
-      //   through: { attributes: [] },
-      // },
+      {
+        model: Skill,
+        as: "skill", 
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
     ],
   });
   return characters;

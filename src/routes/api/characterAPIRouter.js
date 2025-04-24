@@ -5,11 +5,14 @@ import itemAPIController from "../../controllers/item/itemAPIController.js";
 import statsAPIController from "../../controllers/stats/statsAPIController.js";
 import speciesAPIController from "../../controllers/species/speciesAPIController.js";
 import moneyAPIController from "../../controllers/money/moneyAPIController.js";
+import classAPIController from "../../controllers/class/classAPIController.js";
 
 const router = Router();
 
 //obtenemos todos los personajes
 router.get("/", characterAPIController.getAll);
+
+router.get("/:id/class", classAPIController.getByCharacterID);
 
 //obtenemos el dinero de un personaje
 router.get("/:id/money", moneyAPIController.getByCharacterID);

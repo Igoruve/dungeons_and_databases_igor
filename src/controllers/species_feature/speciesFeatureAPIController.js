@@ -1,10 +1,10 @@
-import classController from "./classController.js";
+import speciesFeatureController from "./speciesFeatureController.js";
 
 async function getByID(req, res) {
   try {
     const id = req.params.id;
-    const clas = await classController.GetByID(id);
-    res.json(clas);
+    const speciesFeature = await speciesFeatureController.GetByID(id);
+    res.json(speciesFeature);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error });
@@ -13,19 +13,19 @@ async function getByID(req, res) {
 
 async function getAll(req, res) {
   try {
-    const clas = await classController.GetAll();
-    res.json(clas);
+    const speciesFeature = await speciesFeatureController.GetAll();
+    res.json(speciesFeature);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error });
   }
 }
 
-async function getByCharacterID(req, res) {
+async function getBySpeciesID(req, res) {
   try {
-    const characterId = req.params.id;
-    const clas = await classController.GetByCharacterID(characterId);
-    res.json(clas);
+    const speciesId = req.params.id;
+    const speciesFeature = await speciesFeatureController.GetBySpeciesID(speciesId);
+    res.json(speciesFeature);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });
@@ -34,7 +34,7 @@ async function getByCharacterID(req, res) {
 
 async function create(req, res) {
   try {
-    const response = await classController.Create(req.body);
+    const response = await speciesFeatureController.Create(req.body);
     res.json(response);
   } catch (error) {
     console.error(error);
@@ -49,7 +49,7 @@ async function create(req, res) {
 async function edit(req, res) {
   try {
     const id = req.params.id;
-    const response = await classController.Edit(id, req.body);
+    const response = await speciesFeatureController.Edit(id, req.body);
     res.json(response);
   } catch (error) {
     console.error(error);
@@ -64,7 +64,7 @@ async function edit(req, res) {
 async function remove(req, res) {
   try {
     const id = req.params.id;
-    const response = await classController.Remove(id);
+    const response = await speciesFeatureController.Remove(id);
     res.json(response);
   } catch (error) {
     console.error(error);
@@ -75,7 +75,7 @@ async function remove(req, res) {
 export default {
   getAll,
   getByID,
-  getByCharacterID,
+  getBySpeciesID,
   create,
   edit,
   remove,
