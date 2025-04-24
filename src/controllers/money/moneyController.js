@@ -1,10 +1,17 @@
-import { Money } from "../../models/index.js";
+import { Money, Character } from "../../models/index.js";
 
 async function GetByID(id) {
   const money = await Money.findByPk(id, {
     attributes: {
-      exclude: ["character_id", "money_id"],
+      exclude: ["money_id"],
     },
+    include: [
+      {
+        model: Character, 
+        as: "character", 
+        attributes: ["character_id"], 
+      },
+    ],
   });
   return money;
 }
@@ -15,12 +22,12 @@ async function GetAll() {
 }
 
 async function GetByCharacterID(id) {
-  const money = await Money.findAll({
+  const money = await Money.findOne({
     where: {
       character_id: id,
     },
     attributes: {
-      exclude: ["character_id", "money_id"],
+      exclude: ["character_id", "money_id"], 
     },
   });
   return money;

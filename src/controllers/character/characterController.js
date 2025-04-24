@@ -1,37 +1,52 @@
-import characterModel from "../../models/characterModel.js";
-import Class from "../../models/classModel.js";
-import Species from "../../models/speciesModel.js";
+import characterModel from "../../models/character/characterModel.js";
+import Class from "../../models/class/classModel.js";
+import Species from "../../models/species/speciesModel.js";
 import Stats from "../../models/statsModel.js";
 import User from "../../models/userModel.js";
 import Item from "../../models/itemModel.js";
 import Money from "../../models/moneyModel.js";
+// import Skill from "../../models/skillModel.js";
 
 async function GetByID(id) {
   const character = await characterModel.findByPk(id, {
     attributes: {
-      exclude: [
-        "character_id",
-        "class_id",
-        "species_id",
-        "stats_id",
-        "money_id",
-        "user_id",
-      ],
+      exclude: ["character_id"],
     },
     include: [
-      { model: Class, as: "class", attributes: ["name"] },
-      { model: Species, as: "species", attributes: ["name"] },
+      {
+        model: Class,
+        as: "class",
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
+      {
+        model: Species,
+        as: "species",
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
       {
         model: Stats,
         as: "stats",
         attributes: { exclude: ["stats_id", "character_id"] },
       },
-      { model: Item, as: "item", attributes: ["name"] },
+      {
+        model: Item,
+        as: "items",
+        attributes: ["name"],
+        through: { attributes: ["quantity"] },
+      },
       {
         model: Money,
         as: "money",
         attributes: { exclude: ["money_id", "character_id"] },
       },
+      // {
+      //   model: Skill,
+      //   as: "skill", // Relación de muchos a muchos con Habilidades
+      //   attributes: ["name"],
+      //   through: { attributes: [] },
+      // },
     ],
   });
   return character;
@@ -39,26 +54,43 @@ async function GetByID(id) {
 
 async function GetAll() {
   const characters = await characterModel.findAll({
-    attributes: {
-      exclude: ["class_id", "species_id", "stats_id", "money_id"],
-    },
     include: [
-      { model: Class, as: "class", attributes: ["name"] },
-      { model: Species, as: "species", attributes: ["name"] },
+      {
+        model: Class,
+        as: "class",
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
+      {
+        model: Species,
+        as: "species",
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
       {
         model: Stats,
         as: "stats",
         attributes: { exclude: ["stats_id", "character_id"] },
       },
-      { model: Item, as: "item", attributes: ["name"] },
+      {
+        model: Item,
+        as: "items",
+        attributes: ["name"],
+        through: { attributes: ["quantity"] },
+      },
       {
         model: Money,
         as: "money",
         attributes: { exclude: ["money_id", "character_id"] },
       },
+      // {
+      //   model: Skill,
+      //   as: "skill", // Relación con Habilidades
+      //   attributes: ["name"],
+      //   through: { attributes: [] },
+      // },
     ],
   });
-
   return characters;
 }
 
@@ -68,25 +100,45 @@ async function GetByUserID(id) {
       user_id: id,
     },
     attributes: {
-      exclude: ["class_id", "species_id", "stats_id", "money_id", "user_id"],
+      exclude: ["user_id"],
     },
     include: [
-      { model: Class, as: "class", attributes: ["name"] },
-      { model: Species, as: "species", attributes: ["name"] },
+      {
+        model: Class,
+        as: "class",
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
+      {
+        model: Species,
+        as: "species",
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
       {
         model: Stats,
         as: "stats",
         attributes: { exclude: ["stats_id", "character_id"] },
       },
-      { model: Item, as: "item", attributes: ["name"] },
+      {
+        model: Item,
+        as: "items",
+        attributes: ["name"],
+        through: { attributes: ["quantity"] },
+      },
       {
         model: Money,
         as: "money",
         attributes: { exclude: ["money_id", "character_id"] },
       },
+      // {
+      //   model: Skill,
+      //   as: "skill", // Relación con Habilidades
+      //   attributes: ["name"],
+      //   through: { attributes: [] },
+      // },
     ],
   });
-
   return characters;
 }
 

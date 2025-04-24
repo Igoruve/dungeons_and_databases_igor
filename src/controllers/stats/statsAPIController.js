@@ -7,7 +7,7 @@ async function getByID(req, res) {
     res.json(stats);
   } catch (error) {
     console.error(error);
-    res.statsus(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error" });
   }
 }
 
@@ -17,7 +17,7 @@ async function getAll(req, res) {
     res.json(stats);
   } catch (error) {
     console.error(error);
-    res.statsus(500).json({ error: error });
+    res.status(500).json({ error: error });
   }
 }
 
@@ -28,7 +28,7 @@ async function getByCharacterID(req, res) {
     res.json(stats);
   } catch (error) {
     console.error(error);
-    res.statsus(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error" });
   }
 }
 
@@ -38,10 +38,10 @@ async function create(req, res) {
     res.json(response);
   } catch (error) {
     console.error(error);
-    if (error.statsusCode) {
-      res.statsus(error.statsusCode).json({ error: error.message });
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
     } else {
-      res.statsus(500).json({ error: "Server error" });
+      res.status(500).json({ error: "Server error" });
     }
   }
 }
@@ -53,10 +53,10 @@ async function edit(req, res) {
     res.json(response);
   } catch (error) {
     console.error(error);
-    if (error.statsusCode) {
-      res.statsus(error.statsusCode).json({ error: error.message });
+    if (error.statusCode) {
+      res.status(error.statusCode).json({ error: error.message });
     } else {
-      res.statsus(500).json({ error: "Server error" });
+      res.status(500).json({ error: "Server error" });
     }
   }
 }
@@ -68,7 +68,7 @@ async function remove(req, res) {
     res.json(response);
   } catch (error) {
     console.error(error);
-    res.statsus(500).json({ error: "Server error" });
+    res.status(500).json({ error: "Server error" });
   }
 }
 

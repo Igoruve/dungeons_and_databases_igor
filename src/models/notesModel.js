@@ -18,7 +18,7 @@ const Notes = connection.define("notes", {
   },
   created_at: {
     type: DataTypes.DATE,
-    defaultValue: new Date(),
+    defaultValue: DataTypes.NOW,
     allowNull: true,
   },
   user_id: {

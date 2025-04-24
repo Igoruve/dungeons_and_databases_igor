@@ -37,7 +37,7 @@ const User = connection.define(
     },
     created_at: {
       type: DataTypes.DATE,
-      defaultValue: new Date(),
+      defaultValue: DataTypes.NOW,
       allowNull: false,
     },
   },

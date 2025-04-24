@@ -53,14 +53,6 @@ const Item = connection.define("item", {
     allowNull: false,
     defaultValue: 0,
   },
-  character_id: {
-    type: DataTypes.INTEGER.UNSIGNED,
-    allowNull: false,
-    references: {
-      model: "character",
-      key: "character_id",
-    },
-  },
 });
 
 export default Item;

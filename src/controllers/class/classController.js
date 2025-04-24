@@ -3,18 +3,14 @@ import { Class } from "../../models/index.js";
 async function GetByID(id) {
   const clas = await Class.findByPk(id, {
     attributes: {
-      exclude: ["class_id", "class_feature_id"],
+      exclude: ["class_id"],
     },
   });
   return clas;
 }
 
 async function GetAll() {
-  const clas = await Class.findAll({
-    attributes: {
-      exclude: ["class_feature_id"],
-    },
-  });
+  const clas = await Class.findAll();
   return clas;
 }
 

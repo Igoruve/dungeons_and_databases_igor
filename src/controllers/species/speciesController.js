@@ -1,31 +1,49 @@
-import { Species } from "../../models/index.js";
+import { Character, Species } from "../../models/index.js";
 
 async function GetByID(id) {
   const species = await Species.findByPk(id, {
     attributes: {
-      exclude: ["species_id", "character_id", "species_feature_id"],
+      exclude: ["species_id"],
     },
+    include: [
+      {
+        model: Character,
+        as: "characters",
+        attributes: ["character_id"],
+        through: { attributes: [] },
+      },
+    ],
   });
   return species;
 }
 
 async function GetAll() {
   const species = await Species.findAll({
-    attributes: {
-      exclude: ["character_id", "species_feature_id"],
-    },
+    include: [
+      {
+        model: Character,
+        as: "character",
+        attributes: ["character_id"],
+        through: { attributes: [] },
+      },
+    ],
   });
   return species;
 }
 
-async function GetByCharacterID(id) {
+async function GetByCharacterID(character_id) {
   const species = await Species.findAll({
-    where: {
-      character_id: id,
-    },
-    attributes: {
-      exclude: ["character_id", "species_id", "species_feature_id"],
-    },
+    include: [
+      {
+        model: Character,
+        as: "character",
+        where: {
+          character_id: character_id,
+        },
+        attributes: ["first_name", "last_name"],
+        through: { attributes: [] },
+      },
+    ],
   });
   return species;
 }
@@ -37,18 +55,20 @@ async function Create(data) {
 
 async function Edit(id, data) {
   const species = await Species.findByPk(id);
+
   const result = await species.update(data, {
     where: {
-      Species_id: id,
+      item_id: id,
     },
   });
   return result;
 }
 
 async function Remove(id) {
-  const result = await Species.destroy({
+  const species = await Species.findByPk(id);
+  const result = await species.destroy({
     where: {
-      Species_id: id,
+      item_id: id,
     },
   });
   return result;

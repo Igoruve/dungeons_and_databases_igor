@@ -1,6 +1,6 @@
 import { UserNameNotProvided, UserRoleIncorrect } from "../../utils/errors.js";
 import { User, Notes } from "../../models/index.js";
-import Character from "../../models/characterModel.js";
+import Character from "../../models/character/characterModel.js";
 
 async function GetByID(id) {
   const user = await User.findByPk(id, {

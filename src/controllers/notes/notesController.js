@@ -3,7 +3,7 @@ import notesModel from "../../models/notesModel.js";
 async function GetByID(id) {
   const notes = await notesModel.findByPk(id, {
     attributes: {
-      exclude: ["notes_id", "user_id"],
+      exclude: ["notes_id"],
     },
   });
   return notes;
@@ -33,11 +33,10 @@ async function Create(data) {
 
 async function Edit(id, data) {
   const note = await notesModel.findByPk(id);
-  const result = await note.update(data, {
-    where: {
-      notes_id: id,
-    },
-  });
+  if (!note) {
+    throw new Error("Not found");
+  }
+  const result = await note.update(data);
   return result;
 }
 

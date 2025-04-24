@@ -1,9 +1,9 @@
-import Stats from "../../models/statsModel.js";
+import { Character, Stats } from "../../models/index.js";
 
 async function GetByID(id) {
   const stats = await Stats.findByPk(id, {
     attributes: {
-      exclude: ["stats_id", "character_id"],
+      exclude: ["stats_id"],
     },
   });
   return stats;
@@ -14,14 +14,21 @@ async function GetAll() {
   return stats;
 }
 
-async function GetByCharacterID(id) {
+async function GetByCharacterID(character_id) {
   const stats = await Stats.findAll({
-    where: {
-      character_id: id,
-    },
     attributes: {
       exclude: ["character_id"],
     },
+    include: [
+      {
+        model: Character,
+        as: "character",
+        where: {
+          character_id: character_id,
+        },
+        attributes: ["first_name", "last_name"],
+      },
+    ],
   });
   return stats;
 }

@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import connection from "../config/sequelize.js";
+import connection from "../../config/sequelize.js";
 
 const Class = connection.define(
   "class",
@@ -48,10 +48,6 @@ const Class = connection.define(
     },
     armor_training: {
       type: DataTypes.STRING(45),
-      allowNull: false,
-    },
-    class_feature_id: {
-      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
   },

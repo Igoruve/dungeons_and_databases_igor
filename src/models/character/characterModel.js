@@ -1,46 +1,53 @@
 import { DataTypes } from "sequelize";
-import connection from "../config/sequelize.js";
+import connection from "../../config/sequelize.js";
 
-const Species = connection.define("species", {
-  species_id: {
+const Character = connection.define("character", {
+  character_id: {
     type: DataTypes.INTEGER.UNSIGNED,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
-  name: {
+  first_name: {
     type: DataTypes.STRING(45),
     allowNull: false,
   },
-  creature_type: {
+  last_name: {
     type: DataTypes.STRING(45),
     allowNull: false,
   },
-  size: {
-    type: DataTypes.ENUM("small", "medium"),
-    allowNull: false,
-  },
-  speed: {
+  age: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  darkvision: {
-    type: DataTypes.TINYINT,
+  alignment: {
+    type: DataTypes.STRING(45),
     allowNull: false,
-    defaultValue: 0,
   },
-  species_feature_id: {
+  level: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  character_id: {
+  appereance: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+  lore: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+  personality: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+  user_id: {
     type: DataTypes.INTEGER.UNSIGNED,
     allowNull: false,
     references: {
-      model: "character",
-      key: "character_id",
+      model: "user",
+      key: "user_id",
     },
   },
 });
 
-export default Species;
+export default Character;
