@@ -34,11 +34,14 @@ const Stats = connection.define("stats", {
   },
   character_id: {
     type: DataTypes.INTEGER.UNSIGNED,
+    unique: true,
     allowNull: false,
     references: {
       model: "character",
       key: "character_id",
     },
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
   },
 });
 

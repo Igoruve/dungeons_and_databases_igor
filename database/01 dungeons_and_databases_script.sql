@@ -123,15 +123,16 @@ CREATE TABLE IF NOT EXISTS `stats` (
   `Charisma` INT NOT NULL,
   `Constitution` INT NOT NULL,
   `Wisdom` INT NOT NULL,
-  `character_id` INT UNSIGNED,
+  `character_id` INT UNSIGNED UNIQUE,
   PRIMARY KEY (`stats_id`),
   INDEX (`character_id`),
   CONSTRAINT `fk_stats_character`
     FOREIGN KEY (`character_id`)
     REFERENCES `character` (`character_id`)
-    ON DELETE SET NULL
+    ON DELETE CASCADE
     ON UPDATE CASCADE
 ) ENGINE = InnoDB;
+
 
 -- Tabla: species_feature
 CREATE TABLE IF NOT EXISTS `species_feature` (

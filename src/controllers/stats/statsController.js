@@ -34,6 +34,14 @@ async function GetByCharacterID(character_id) {
 }
 
 async function Create(data) {
+  const existingStats = await Stats.findOne({
+    where: { character_id: data.character_id },
+  });
+  if (existingStats) {
+    const error = new Error("Already has asigned stats");
+    error.statusCode = 400;
+    throw error;
+  }
   const result = await Stats.create(data);
   return result;
 }
