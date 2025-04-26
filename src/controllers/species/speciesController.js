@@ -8,7 +8,7 @@ async function GetByID(id) {
     include: [
       {
         model: Character,
-        as: "characters",
+        as: "character",
         attributes: ["character_id"],
         through: { attributes: [] },
       },

@@ -41,7 +41,7 @@ async function create(req, res) {
     if (error.statusCode) {
       res.status(error.statusCode).json({ error: error.message });
     } else {
-      res.status(500).json({ error: "Server error" });
+      res.status(500).json({ error: error });
     }
   }
 }

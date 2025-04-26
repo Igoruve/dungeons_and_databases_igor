@@ -24,8 +24,8 @@ async function getAll(req, res) {
 async function getByCharacterID(req, res) {
   try {
     const characterId = req.params.id;
-    const moneys = await moneyController.GetByCharacterID(characterId);
-    res.json(moneys);
+    const money = await moneyController.GetByCharacterID(characterId);
+    res.json(money);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Server error" });

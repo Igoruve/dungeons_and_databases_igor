@@ -34,7 +34,9 @@ async function getByUserID(req, res) {
 
 async function create(req, res) {
   try {
-    const response = await notesController.Create(req.body);
+    const noteData = { ...req.body };
+    noteData.user_id = req.user.user_id;
+    const response = await notesController.Create(noteData);
     res.json(response);
   } catch (error) {
     console.error(error);
@@ -48,8 +50,20 @@ async function create(req, res) {
 
 async function edit(req, res) {
   try {
-    const id = req.params.id;
-    const response = await notesController.Edit(id, req.body);
+    const noteId = req.params.id;
+    const userId = req.user.user_id;
+    const existingNote = await notesController.GetByID(noteId);
+    if (!existingNote) {
+      return res.status(404).json({ error: "Not found" });
+    }
+    if (existingNote.user_id !== userId) {
+      return res.status(403).json({
+        error: "Unauthorized",
+      });
+    }
+    const updateData = { ...req.body };
+    delete updateData.user_id;
+    const response = await notesController.Edit(noteId, updateData);
     res.json(response);
   } catch (error) {
     console.error(error);
@@ -63,8 +77,18 @@ async function edit(req, res) {
 
 async function remove(req, res) {
   try {
-    const id = req.params.id;
-    const response = await notesController.Remove(id);
+    const noteId = req.params.id;
+    const userId = req.user.user_id;
+    const existingNote = await notesController.GetByID(noteId);
+    if (!existingNote) {
+      return res.status(404).json({ error: "Not found" });
+    }
+    if (existingNote.user_id !== userId) {
+      return res.status(403).json({
+        error: "Unauthorized",
+      });
+    }
+    const response = await notesController.Remove(noteId);
     res.json(response);
   } catch (error) {
     console.error(error);

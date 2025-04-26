@@ -28,9 +28,10 @@ async function getByCharacterID(req, res) {
     res.json(skill);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: error });
   }
 }
+
 async function create(req, res) {
   try {
     const response = await skillController.Create(req.body);

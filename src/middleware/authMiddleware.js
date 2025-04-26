@@ -1,4 +1,5 @@
 import { verifyToken } from "../utils/token.js";
+import characterModel from "../models/character/characterModel.js";
 
 function isLoggedInSession(req, res, next) {
   const user = req.session.user;
@@ -10,14 +11,11 @@ function isLoggedInSession(req, res, next) {
 
 function isLoggedInAPI(req, res, next) {
   const authorization = req.headers.authorization;
-  console.log("authorization", authorization);
   if (!authorization) {
-    res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ error: "Unauthorized" });
   }
-  let token = authorization.split(" ");
-  token = token.pop();
+  let token = authorization.split(" ").pop();
   const result = verifyToken(token);
-  console.log("token verified", result);
   if (result) {
     req.user = {
       user_id: result.user_id,
@@ -25,8 +23,7 @@ function isLoggedInAPI(req, res, next) {
     };
     next();
   } else {
-    res.status(401).json({ error: "Unauthorized" });
-    return false;
+    return res.status(401).json({ error: "Unauthorized" });
   }
 }
 
@@ -37,12 +34,70 @@ function isMaster(req, res, next) {
   next();
 }
 
-function isSameUser(req, res, next) {
-  if (parseInt(req.params.id) !== req.user.user_id) {
-    return res.status(403).json({ error: "Forbidden: You can only edit yourself" });
+async function isOwnerOfCharacter(req, res, next) {
+  try {
+    const characterId = req.params.id;
+    const loggedUserId = req.user.user_id;
+    const character = await characterModel.findByPk(characterId);
+    if (!character) {
+      return res.status(404).json({ error: "Character not found" });
+    }
+    if (character.user_id !== loggedUserId && req.user.role !== "master") {
+      return res
+        .status(403)
+        .json({ error: "Forbidden: You don't own this character" });
+    }
+    next();
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Server error" });
+  }
+}
+
+function isOwner(model, foreignKey = "character_id") {
+  return async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const loggedUserId = req.user.user_id;
+      const resource = await model.findByPk(id);
+      if (!resource) {
+        return res.status(404).json({ error: "Not found" });
+      }
+      const characterId = resource[foreignKey];
+      const character = await characterModel.findByPk(characterId);
+      if (!character) {
+        return res.status(404).json({ error: "Character not found" });
+      }
+      if (character.user_id !== loggedUserId && req.user.role !== "master") {
+        return res
+          .status(403)
+          .json({ error: "Forbidden: You don't own this character" });
+      }
+      next();
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Server error" });
+    }
+  };
+}
+
+function isOwnerUser(req, res, next) {
+  const requestedUserId = parseInt(req.params.id);
+  const loggedUserId = req.user.user_id;
+
+  if (requestedUserId !== loggedUserId && req.user.role !== "master") {
+    return res
+      .status(403)
+      .json({ error: "Forbidden: You don't have access to this user" });
   }
   next();
 }
 
-
-export { isLoggedInSession, isLoggedInAPI, isMaster, isSameUser };
+export {
+  isLoggedInSession,
+  isLoggedInAPI,
+  isMaster,
+  isOwnerOfCharacter,
+  isOwner,
+  isOwnerUser,
+};

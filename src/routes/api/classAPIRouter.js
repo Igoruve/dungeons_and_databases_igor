@@ -8,6 +8,7 @@ const router = Router();
 //obtenemos todas las clases
 router.get("/", classAPIController.getAll);
 
+//obtenemos las features de una clase
 router.get("/:id/class_feature", classFeatureAPIController.getByClassID);
 
 //obtenemos una clase

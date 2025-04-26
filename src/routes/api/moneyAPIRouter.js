@@ -1,6 +1,7 @@
 import { Router } from "express";
 import moneyAPIController from "../../controllers/money/moneyAPIController.js";
-import { isLoggedInAPI, isMaster } from "../../middleware/authMiddleware.js";
+import { isLoggedInAPI, isMaster, isOwner } from "../../middleware/authMiddleware.js";
+import moneyModel from "../../models/moneyModel.js";
 
 const router = Router();
 
@@ -14,7 +15,7 @@ router.get("/:id", moneyAPIController.getByID);
 router.post("/", isLoggedInAPI, isMaster, moneyAPIController.create);
 
 //actualizamos un dinero
-router.put("/:id", isLoggedInAPI, isMaster, moneyAPIController.edit);
+router.put("/:id", isLoggedInAPI, isOwner(moneyModel), moneyAPIController.edit);
 
 //borramos un dinero
 router.delete("/:id", isLoggedInAPI, isMaster, moneyAPIController.remove);

@@ -4,19 +4,19 @@ import { isLoggedInAPI, isMaster } from "../../middleware/authMiddleware.js";
 
 const router = Router();
 
-//obtenemos todos los objetos
+//obtenemos todas las class features
 router.get("/", statsAPIController.getAll);
 
-//obtenemos un objeto
+//obtenemos una class feature
 router.get("/:id", statsAPIController.getByID);
 
-//creamos un objeto
-router.post("/", isLoggedInAPI, statsAPIController.create);
+//creamos una class feature
+router.post("/", isLoggedInAPI, isMaster, statsAPIController.create);
 
-//actualizamos un objeto
-router.put("/:id", isLoggedInAPI, statsAPIController.edit);
+//actualizamos una class feature
+router.put("/:id", isLoggedInAPI, isMaster, statsAPIController.edit);
 
-//borramos un objeto
-router.delete("/:id", isLoggedInAPI, statsAPIController.remove);
+//borramos una class feature
+router.delete("/:id", isLoggedInAPI, isMaster, statsAPIController.remove);
 
 export default router;
