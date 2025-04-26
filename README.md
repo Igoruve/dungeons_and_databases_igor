@@ -1,78 +1,76 @@
-# proyecto_individual_backend
+# Dungeons and Databases
+Dungeons and Databases is a backend project developed from scratch using Node.js, Express, and Sequelize, with persistence in a MySQL database. The main goal is to showcase the construction of a functional and secure RESTful API, integrating modern backend development practices.
 
-## Dungeons and Databases
-Dungeons and Databases es un proyecto backend desarrollado desde cero utilizando Node.js, Express y Sequelize, con persistencia en una base de datos MySQL. El objetivo principal es mostrar la construcción de una API RESTful funcional y segura, integrando prácticas modernas de desarrollo backend.
+## Technologies Used
+- Node.js + Express (server and routing)
 
-## Tecnologías utilizadas
-- Node.js + Express (servidor y enrutamiento)
+- Sequelize (ORM for MySQL)
 
-- Sequelize (ORM para MySQL)
+- MySQL (relational database)
 
-- MySQL (base de datos relacional)
+- Docker (containerization)
 
-- Docker (contenedorización)
+- Workbench (visual database management)
 
-- Workbench (gestión visual de la base de datos)
+- Postman (API testing)
 
-- Postman (pruebas de la API)
+- dotenv (environment variable management)
 
-- dotenv (gestión de variables de entorno)
+- bcrypt (password encryption)
 
-- bcrypt (encriptación de contraseñas)
+- JWT (JSON Web Tokens) (secure authentication)
 
-- JWT (JSON Web Tokens) (autenticación segura)
-
-## Instalación y ejecución
-### Clona el repositorio:
-git clone https://github.com/tu_usuario/dungeons_and_databases.git
+## Installation and Execution
+### Clone the repository:
+git clone https://github.com/your_user/dungeons_and_databases.git
 cd dungeons_and_databases
 
-### Instala las dependencias:
+### Install dependencies:
 npm install
-Crea un archivo .env en la raíz del proyecto con las siguientes variables:
 
-DB_USER=tu_usuario_mysql
-DB_PASSWORD=tu_contraseña_mysql
+### Create a .env file at the root of the project with the following variables:
+
+DB_USER=your_mysql_user
+DB_PASSWORD=your_mysql_password
 DB_NAME=dungeons_and_databases
 DB_HOST=localhost
 DB_PORT=3306
-JWT_SECRET=tu_secreto_jwt
+JWT_SECRET=your_jwt_secret
 
-(Opcional) Si quieres correr todo con Docker:
+### (Optional) If you want to run everything with Docker:
+
 docker-compose up --build
 
-## Autenticación y seguridad
-Registro y Login protegidos mediante bcrypt para almacenar contraseñas de manera segura.
+## Authentication and Security
+Registration and login are protected using bcrypt to securely store passwords.
 
-JWT utilizado para la generación de tokens de sesión y autenticación de rutas privadas.
+JWT is used to generate session tokens and to authenticate private routes.
 
-## Principales funcionalidades de la API
-### Autenticación:
+## Main API Features
+### Authentication:
+POST /register — Create a new user.
 
-POST /register — Crear un nuevo usuario.
+POST /login — Authenticate a user and return a token.
 
-POST /login — Autenticar un usuario y devolver un token.
+### Characters (example):
+GET /character — List all characters.
 
-### Personajes (ejemplo):
+GET /character/:id — View details of a character.
 
-GET /character — Listar todos los personajes.
+POST /character — Create a character.
 
-GET /character/:id — Ver detalles de un personaje.
+PUT /character/:id — Update a character.
 
-POST /character — Crear un personaje.
+DELETE /character/:id — Delete a character.
 
-PUT /character/:id — Actualizar un personaje.
-
-DELETE /character/:id — Eliminar un personaje.
-
-
-### Pruebas
-Se realizaron pruebas de los endpoints utilizando Postman.
+## Testing
+Endpoints were tested using Postman.
 
 ## Docker
-El proyecto puede levantarse fácilmente utilizando Docker con la base de datos incluida.
+The project can easily be launched using Docker, with the database included.
 
 docker-compose up
-Esto levantará tanto el servidor de Node.js como una instancia de MySQL configurada.
 
-Desarrollado por igoruve
+This will launch both the Node.js server and a MySQL instance.
+
+Developed by igoruve
