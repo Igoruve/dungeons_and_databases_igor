@@ -41,22 +41,6 @@ JWT_SECRET=tu_secreto_jwt
 (Opcional) Si quieres correr todo con Docker:
 docker-compose up --build
 
-## Estructura del proyecto
-├── src
-│   ├── controllers
-│   ├── middlewares
-│   ├── models
-│   ├── public
-│   ├── routes
-│   ├── utils
-│   ├── app.js
-│   └── config
-│       └── db.js
-├── .env
-├── docker-compose.yml
-├── package.json
-└── README.md
-
 ## Autenticación y seguridad
 Registro y Login protegidos mediante bcrypt para almacenar contraseñas de manera segura.
 
@@ -69,7 +53,7 @@ POST /register — Crear un nuevo usuario.
 
 POST /login — Autenticar un usuario y devolver un token.
 
-### Personajes (ejemplo:
+### Personajes (ejemplo):
 
 GET /character — Listar todos los personajes.
 
