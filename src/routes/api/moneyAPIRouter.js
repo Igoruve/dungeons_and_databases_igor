@@ -12,12 +12,12 @@ router.get("/", moneyAPIController.getAll);
 router.get("/:id", moneyAPIController.getByID);
 
 //creamos un dinero
-router.post("/", /* isLoggedInAPI, isMaster, */ moneyAPIController.create);
+router.post("/", isLoggedInAPI, isMaster, moneyAPIController.create);
 
 //actualizamos un dinero
-router.put("/:id", /* isLoggedInAPI, isOwner(moneyModel), */ moneyAPIController.edit);
+router.put("/:id", isLoggedInAPI, isOwner(moneyModel), moneyAPIController.edit);
 
 //borramos un dinero
-router.delete("/:id", /* isLoggedInAPI, isMaster, */ moneyAPIController.remove);
+router.delete("/:id", isLoggedInAPI, isMaster, moneyAPIController.remove);
 
 export default router;

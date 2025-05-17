@@ -52,7 +52,7 @@ INSERT INTO `user`
 VALUES 
 (1, 'dungeon.master@gmail.com', '$2b$10$3hlItH6DsK5FMGuhhgsGj.IivU6zHhKREr5o3X4V72qnHoq44NLBK', '2025-03-15 18:30:00', 'Morgan', 'Blackwood', 'master', 'ArchMage'),
 (2, 'barbarian.player@gmail.com', '$2b$10$3hlItH6DsK5FMGuhhgsGj.IivU6zHhKREr5o3X4V72qnHoq44NLBK', '2025-03-16 10:15:00', 'Mike', 'Johnson', 'player', 'MountainCrusher'),
-(3, 'rogue.player@gmail.com', '$2b$10$3hlItH6DsK5FMGuhhgsGj.IivU6zHhKREr5o3X4V72qnHoq44NLBK', '2025-03-16 14:20:00', 'Sarah', 'Williams', 'player', 'ShadowDancer'),
+(3, 'demo@gmail.com', '$2b$10$3hlItH6DsK5FMGuhhgsGj.IivU6zHhKREr5o3X4V72qnHoq44NLBK', '2025-03-16 14:20:00', 'Sarah', 'Williams', 'player', 'ShadowDancer'),
 (4, 'wizard.player@gmail.com', '$2b$10$3hlItH6DsK5FMGuhhgsGj.IivU6zHhKREr5o3X4V72qnHoq44NLBK', '2025-03-17 09:45:00', 'Thomas', 'Chen', 'player', 'SpellSeeker'),
 (5, 'druid.player@gmail.com', '$2b$10$3hlItH6DsK5FMGuhhgsGj.IivU6zHhKREr5o3X4V72qnHoq44NLBK', '2025-03-18 11:30:00', 'Emma', 'Garcia', 'player', 'WildShape');
 

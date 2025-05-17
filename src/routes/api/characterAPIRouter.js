@@ -17,80 +17,80 @@ const router = Router();
 router.get("/:id/stats", characterStatsController.getByCharacterID);
 
 //obtenemos todos los personajes
-router.get("/", /* isLoggedInAPI, isMaster, */ characterAPIController.getAll);
+router.get("/", isLoggedInAPI, isMaster, characterAPIController.getAll);
 
 // Obtener las estadísticas de un personaje
 router.get(
   "/:id/stats",
-  // isLoggedInAPI,
-  // isOwnerOfCharacter,
+  isLoggedInAPI,
+  isOwnerOfCharacter,
   characterStatsController.getByCharacterID
 );
 
 //obtenemos las habilidades de un personaje
 router.get(
   "/:id/skill",
-  // /*   isLoggedInAPI,
-  // isOwnerOfCharacter, */
+  isLoggedInAPI,
+  isOwnerOfCharacter,
   skillAPIController.getByCharacterID
 );
 
 //obtenemos la clase de un personaje
 router.get(
   "/:id/class",
-  // isLoggedInAPI,
-  // isOwnerOfCharacter,
+  isLoggedInAPI,
+  isOwnerOfCharacter,
   classAPIController.getByCharacterID
 );
 
 //obtenemos el dinero de un personaje
 router.get(
   "/:id/money",
-  // isLoggedInAPI,
-  // isOwnerOfCharacter,
+  isLoggedInAPI,
+  isOwnerOfCharacter,
   moneyAPIController.getByCharacterID
 );
 
 //obtenemos los items de un personaje
 router.get(
   "/:id/item",
-// /*   isLoggedInAPI,
-//   isOwnerOfCharacter, */
+  isLoggedInAPI,
+  isOwnerOfCharacter,
   itemAPIController.getByCharacterID
 );
 
 //obtenemos la especie de un personaje
 router.get(
   "/:id/species",
-  // isLoggedInAPI,
-  // isOwnerOfCharacter,
+  isLoggedInAPI,
+  isOwnerOfCharacter,
   speciesAPIController.getByCharacterID
 );
 
 //obtenemos un personaje
 router.get(
   "/:id",
-// /*   isLoggedInAPI,
-//   isOwnerOfCharacter, */
+  isLoggedInAPI,
+  isOwnerOfCharacter,
   characterAPIController.getByID
 );
 
 //creamos un personaje
-router.post("/", /* isLoggedInAPI, */ characterAPIController.create);
+router.post("/", isLoggedInAPI, characterAPIController.create);
 
 //actualizamos un personaje
 router.put(
   "/:id",
-  // isLoggedInAPI,
-  // isOwnerOfCharacter,
+  isLoggedInAPI,
+  isOwnerOfCharacter,
   characterAPIController.edit
 );
 
 //borramos un personaje
 router.delete(
   "/:id",
-  // isLoggedInAPI,
-  // isOwnerOfCharacter,
+  isLoggedInAPI,
+  isOwnerOfCharacter,
   characterAPIController.remove
 );
 
