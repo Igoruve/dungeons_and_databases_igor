@@ -6,23 +6,23 @@ import itemAPIRouter from "./itemAPIRouter.js";
 import classAPIRouter from "./classAPIRouter.js";
 import speciesAPIRouter from "./speciesAPIRouter.js";
 import authAPIRouter from "./authAPIRouter.js";
-import statsAPIRouter from "./statsAPIRouter.js";
 import moneyAPIRouter from "./moneyAPIRouter.js";
 import skillAPIRouter from "./skillAPIRouter.js";
 import classFeatureAPIRouter from "./classFeatureAPIRouter.js";
 import speciesFeatureAPIRouter from "./speciesFeatureAPIRouter.js";
+import createCharacterAPIRouter from "./createCharacterAPIRouter.js";
 
 const router = Router();
 
 router.get("/", (req, res) => {
-  res.send("Welcome friends!");
+  res.json({ message: "Welcome friends!" });
 });
 
+router.use("/createcharacter", createCharacterAPIRouter);
 router.use("/species_feature", speciesFeatureAPIRouter);
 router.use("/class_feature", classFeatureAPIRouter);
 router.use("/skill", skillAPIRouter);
 router.use("/money", moneyAPIRouter);
-router.use("/stats", statsAPIRouter);
 router.use("/species", speciesAPIRouter);
 router.use("/class", classAPIRouter);
 router.use("/item", itemAPIRouter);

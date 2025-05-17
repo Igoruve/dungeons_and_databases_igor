@@ -17,16 +17,16 @@ router.get("/", itemAPIController.getAll);
 router.get("/:id", itemAPIController.getByID);
 
 //creamos un objeto
-router.post("/", isLoggedInAPI, isMaster, itemAPIController.create);
+router.post("/", /* isLoggedInAPI, isMaster,  */itemAPIController.create);
 
 //actualizamos un objeto
-router.put("/:id", isLoggedInAPI, isOwner(itemModel), itemAPIController.edit);
+router.put("/:id", /* isLoggedInAPI, isOwner(itemModel),  */itemAPIController.edit);
 
 //borramos un objeto
 router.delete(
   "/:id",
-  isLoggedInAPI,
-  isOwner(itemModel),
+/*   isLoggedInAPI,
+  isOwner(itemModel), */
   itemAPIController.remove
 );
 

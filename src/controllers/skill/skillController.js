@@ -2,9 +2,14 @@ import { Skill, Character } from "../../models/index.js";
 
 async function GetByID(id) {
   const skill = await Skill.findByPk(id, {
-    attributes: {
-      exclude: ["skill_id"],
-    },
+    include: [
+      {
+        model: Character,
+        as: "character",
+        attributes: ["character_id"],
+        through: { attributes: ["quantity"] },
+      },
+    ],
   });
   return skill;
 }
@@ -23,7 +28,7 @@ async function GetByCharacterID(character_id) {
         where: {
           character_id: character_id,
         },
-        attributes: ["first_name", "last_name"],
+        attributes: ["first_name", "last_name", "character_id"],
         through: { attributes: [] },
       },
     ],

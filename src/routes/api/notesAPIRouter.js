@@ -12,16 +12,15 @@ router.get("/", notesAPIController.getAll);
 router.get("/:id", notesAPIController.getByID);
 
 //creamos una nota
-router.post("/", isLoggedInAPI, notesAPIController.create);
+router.post("/", /* isLoggedInAPI, */ notesAPIController.create);
 
 //actualizamos una nota
-router.put("/:id", isLoggedInAPI, isOwner(notesModel), notesAPIController.edit);
+router.put("/:id", /* isLoggedInAPI, */ notesAPIController.edit);
 
 //borramos una nota
 router.delete(
   "/:id",
-  isLoggedInAPI,
-  isOwner(notesModel),
+  /* isLoggedInAPI, */
   notesAPIController.remove
 );
 

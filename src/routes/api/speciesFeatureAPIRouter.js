@@ -11,12 +11,12 @@ router.get("/", speciesFeatureAPIController.getAll);
 router.get("/:id", speciesFeatureAPIController.getByID);
 
 //creamos una especie
-router.post("/", isLoggedInAPI, isMaster, speciesFeatureAPIController.create);
+router.post("/", /* isLoggedInAPI, isMaster, */ speciesFeatureAPIController.create);
 
 //actualizamos una especie
-router.put("/:id", isLoggedInAPI, isMaster, speciesFeatureAPIController.edit);
+router.put("/:id", /* isLoggedInAPI, isMaster, */ speciesFeatureAPIController.edit);
 
 //borramos una especie
-router.delete("/:id", isLoggedInAPI, isMaster, speciesFeatureAPIController.remove);
+router.delete("/:id", /* isLoggedInAPI, isMaster, */ speciesFeatureAPIController.remove);
 
 export default router;

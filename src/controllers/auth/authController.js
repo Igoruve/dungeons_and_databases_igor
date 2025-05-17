@@ -71,6 +71,7 @@ async function login(email, password) {
   }
 }
 
+
 export default {
   register,
   login,

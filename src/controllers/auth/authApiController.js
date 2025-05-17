@@ -25,7 +25,7 @@ async function login(req, res) {
       role: result.role,
     };
     const token = createToken(data);
-    res.json({ token: token });
+    res.json({ token: token, user:data });
   } catch (error) {
     console.error(error);
     if (error.statusCode) {

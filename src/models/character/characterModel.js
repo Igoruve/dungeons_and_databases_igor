@@ -28,7 +28,7 @@ const Character = connection.define("character", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  appereance: {
+  appearance: {
     type: DataTypes.TEXT,
     allowNull: true,
   },

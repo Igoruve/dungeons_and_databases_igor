@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `class` (
   `class_id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `description` TEXT NOT NULL,
-  `hit_die` VARCHAR(10) NOT NULL,
+  `hit_die` INT NOT NULL,
   `main_stat` VARCHAR(20) NOT NULL,
   `caster` TINYINT NOT NULL,
   `saving_throw_proficiencies` VARCHAR(45) NOT NULL,
@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `class` (
   PRIMARY KEY (`class_id`),
   UNIQUE (`name`)
 ) ENGINE = InnoDB;
+
 
 -- Tabla: skill
 CREATE TABLE IF NOT EXISTS `skill` (
@@ -84,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `character` (
   `age` INT NOT NULL,
   `alignment` VARCHAR(45) NOT NULL,
   `level` INT NOT NULL,
-  `appereance` TEXT,
+  `appearance` TEXT,
   `lore` TEXT,
   `personality` TEXT,
   `user_id` INT UNSIGNED NOT NULL,
@@ -111,25 +112,6 @@ CREATE TABLE IF NOT EXISTS `money` (
     FOREIGN KEY (`character_id`)
     REFERENCES `character` (`character_id`)
     ON DELETE SET NULL
-    ON UPDATE CASCADE
-) ENGINE = InnoDB;
-
--- Tabla: stats 
-CREATE TABLE IF NOT EXISTS `stats` (
-  `stats_id` INT NOT NULL AUTO_INCREMENT,
-  `Dexterity` INT NOT NULL,
-  `Intelligence` INT NOT NULL,
-  `Strength` INT NOT NULL,
-  `Charisma` INT NOT NULL,
-  `Constitution` INT NOT NULL,
-  `Wisdom` INT NOT NULL,
-  `character_id` INT UNSIGNED UNIQUE,
-  PRIMARY KEY (`stats_id`),
-  INDEX (`character_id`),
-  CONSTRAINT `fk_stats_character`
-    FOREIGN KEY (`character_id`)
-    REFERENCES `character` (`character_id`)
-    ON DELETE CASCADE
     ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
@@ -272,6 +254,14 @@ CREATE TABLE IF NOT EXISTS `character_has_item` (
     ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
+CREATE TABLE `character_has_stats` (
+  `character_id` INT UNSIGNED NOT NULL,
+  `stat_name` VARCHAR(50) NOT NULL,
+  `value` INT NOT NULL DEFAULT 0,
+  INDEX (`character_id`),
+  PRIMARY KEY (character_id, stat_name),
+  FOREIGN KEY (character_id) REFERENCES `character`(character_id) ON DELETE CASCADE
+);
 
 -- Restaurar configuración
 SET SQL_MODE=@OLD_SQL_MODE;

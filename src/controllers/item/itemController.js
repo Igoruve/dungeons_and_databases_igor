@@ -2,9 +2,6 @@ import { Item, Character } from "../../models/index.js";
 
 async function GetByID(id) {
   const item = await Item.findByPk(id, {
-    attributes: {
-      exclude: ["item_id"],
-    },
     include: [
       {
         model: Character,
@@ -22,7 +19,7 @@ async function GetAll() {
     include: [
       {
         model: Character,
-        as: "character",
+        as: "characters",
         attributes: ["character_id"],
         through: { attributes: ["quantity"] },
       },
@@ -36,11 +33,11 @@ async function GetByCharacterID(character_id) {
     include: [
       {
         model: Character,
-        as: "character",
+        as: "characters",
         where: {
           character_id: character_id,
         },
-        attributes: ["first_name", "last_name"],
+        attributes: ["character_id", "first_name", "last_name"],
         through: { attributes: ["quantity"] },
       },
     ],

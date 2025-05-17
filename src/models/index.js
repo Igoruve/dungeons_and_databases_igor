@@ -5,11 +5,12 @@ import Item from "./itemModel.js";
 import Class from "./class/classModel.js";
 import Character from "./character/characterModel.js";
 import Species from "./species/speciesModel.js";
-import Stats from "./statsModel.js";
 import Money from "./moneyModel.js";
 import Skill from "./skillModel.js";
 import ClassFeature from "./class/class_featureModel.js";
 import SpeciesFeature from "./species/species_featureModel.js";
+import CharacterHasItem from "./character/character_has_item.js";
+import CharacterHasStats from "./character/character_has_stats.js";
 
 User.hasMany(Notes, { foreignKey: "user_id", as: "notes" });
 Notes.belongsTo(User, { foreignKey: "user_id", as: "user" });
@@ -19,9 +20,6 @@ Character.belongsTo(User, { foreignKey: "user_id", as: "user" });
 
 Character.hasOne(Money, { foreignKey: "character_id", as: "money" });
 Money.belongsTo(Character, { foreignKey: "character_id", as: "character" });
-
-Character.hasOne(Stats, { foreignKey: "character_id", as: "stats" });
-Stats.belongsTo(Character, { foreignKey: "character_id", as: "character" });
 
 Character.belongsToMany(Class, {
   through: "character_has_class",
@@ -66,17 +64,17 @@ Skill.belongsToMany(Character, {
 });
 
 Character.belongsToMany(Item, {
-  through: "character_has_item",
+  through: CharacterHasItem,
   foreignKey: "character_id",
   otherKey: "item_id",
   as: "items",
 });
 
 Item.belongsToMany(Character, {
-  through: "character_has_item",
+  through: CharacterHasItem,
   foreignKey: "item_id",
   otherKey: "character_id",
-  as: "character",
+  as: "characters",
 });
 
 Class.belongsToMany(ClassFeature, {
@@ -107,6 +105,15 @@ SpeciesFeature.belongsToMany(Species, {
   as: "species",
 });
 
+Character.hasMany(CharacterHasStats, {
+  foreignKey: "character_id",
+  as: "characterStats",
+});
+CharacterHasStats.belongsTo(Character, {
+  foreignKey: "character_id",
+  as: "character",
+});
+
 export {
   connection,
   User,
@@ -115,7 +122,6 @@ export {
   Class,
   Character,
   Species,
-  Stats,
   Money,
   Skill,
   ClassFeature,

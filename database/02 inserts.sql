@@ -16,12 +16,12 @@ INSERT INTO class_feature (class_feature_id, name, description, level) VALUES
 
 -- Classes
 INSERT INTO class (class_id, name, description, hit_die, main_stat, caster, saving_throw_proficiencies, tool_proficiencies, weapon_proficiencies, skill_proficiencies, armor_training) VALUES
-(1, 'Barbarian', 'A fierce warrior of primitive background who can enter a battle rage.', 'd12', 'STR', 0, 'STR, CON', NULL, 'Simple, Martial', 'Nature, Animal Handling', 'Light, Medium, Shields'),
-(2, 'Rogue', 'A scoundrel who uses stealth and trickery to overcome obstacles and enemies.', 'd8', 'DEX', 0, 'DEX, INT', 'Thieves'' Tools', 'Simple, Hand Crossbows', 'Stealth, Sleight of Hand', 'Light'),
-(3, 'Wizard', 'A scholarly magic-user capable of manipulating the structures of reality.', 'd6', 'INT', 1, 'INT, WIS', NULL, 'Daggers, Darts', 'Arcana, History', NULL),
-(4, 'Paladin', 'A holy warrior bound to a sacred oath.', 'd10', 'STR', 1, 'WIS, CHA', NULL, 'Simple, Martial', 'Religion, Persuasion', 'All, Shields'),
-(5, 'Bard', 'An inspiring magician whose power echoes the music of creation.', 'd8', 'CHA', 1, 'DEX, CHA', 'Musical Instruments', 'Simple', 'Performance, Persuasion', 'Light'),
-(6, 'Druid', 'A priest of the Old Faith, wielding the powers of nature.', 'd8', 'WIS', 1, 'INT, WIS', 'Herbalism Kit', 'Clubs, Scimitars', 'Nature, Survival', 'Light, Medium, Shields');
+(1, 'Barbarian', 'A fierce warrior of primitive background who can enter a battle rage.', 12, 'STR', 0, 'STR, CON', NULL, 'Simple, Martial', 'Nature, Animal Handling', 'Light, Medium, Shields'),
+(2, 'Rogue', 'A scoundrel who uses stealth and trickery to overcome obstacles and enemies.', 8, 'DEX', 0, 'DEX, INT', 'Thieves'' Tools', 'Simple, Hand Crossbows', 'Stealth, Sleight of Hand', 'Light'),
+(3, 'Wizard', 'A scholarly magic-user capable of manipulating the structures of reality.', 6, 'INT', 1, 'INT, WIS', NULL, 'Daggers, Darts', 'Arcana, History', NULL),
+(4, 'Paladin', 'A holy warrior bound to a sacred oath.', 10, 'STR', 1, 'WIS, CHA', NULL, 'Simple, Martial', 'Religion, Persuasion', 'All, Shields'),
+(5, 'Bard', 'An inspiring magician whose power echoes the music of creation.', 8, 'CHA', 1, 'DEX, CHA', 'Musical Instruments', 'Simple', 'Performance, Persuasion', 'Light'),
+(6, 'Druid', 'A priest of the Old Faith, wielding the powers of nature.', 8, 'WIS', 1, 'INT, WIS', 'Herbalism Kit', 'Clubs, Scimitars', 'Nature, Survival', 'Light, Medium, Shields');
 
 
 -- Skills
@@ -57,17 +57,34 @@ VALUES
 (5, 'druid.player@gmail.com', '$2b$10$3hlItH6DsK5FMGuhhgsGj.IivU6zHhKREr5o3X4V72qnHoq44NLBK', '2025-03-18 11:30:00', 'Emma', 'Garcia', 'player', 'WildShape');
 
 INSERT INTO `notes` (notes_id, title, description, created_at, user_id) VALUES
-(1, 'The Ancient Tomb', 'The party will encounter a sealed tomb in the Whispering Woods...', '2025-03-15 18:30:00', 1),
-(2, 'Campaign Villain Ideas', 'Lord Blackthorn - corrupt noble secretly working with a cult...', '2025-03-16 10:15:00', 1),
-(3, 'Next Session Outline', 'Town of Millbrook celebration interrupted by mysterious disappearances...', '2025-03-16 14:20:00', 1),
-(4, 'Thokk''s Battle Memories', 'Need to remember that goblin chieftain''s name...', '2025-03-17 09:45:00', 2),
-(5, 'Lilith''s Heist Plans', 'Next target: Merchant Guild treasury...', '2025-03-18 11:30:00', 2),
-(6, 'Alaric''s Research Journal', 'Fascinating discovery in the ancient text from Highpeak Library...', '2025-03-19 13:30:00', 3),
-(7, 'Bramble''s Nature Observations', 'Signs of corruption spreading in Whispering Woods...', '2025-03-20 14:45:00', 4);
+(1, 'The Ancient Tomb', 'The party will encounter a sealed tomb in the Whispering Woods, hidden beneath an ancient oak marked with runic symbols of warning. The entrance is sealed with a complex lock mechanism requiring three specific keystones scattered throughout the forest. Local legends speak of the tomb belonging to Archmagus Vathiron, a powerful wizard who sealed himself away with his most dangerous creations.
+Inside the tomb, the party will navigate through a series of trapped chambers designed to test both courage and wit. The first chamber contains animated stone guardians that activate when light touches them - forcing the party to navigate in darkness or face combat. The second chamber features a floor puzzle based on constellations that will flood the room with corrosive liquid if solved incorrectly.
+The final chamber houses Vathiron''s sarcophagus, surrounded by pedestals holding artifacts of great power. However, disturbing the sarcophagus will awaken Vathiron himself, now transformed into a lich after centuries of magical experiments in isolation. He will initially attempt to converse with the party, curious about the outside world, but will become hostile if they attempt to take any artifacts or if they mention the spreading corruption in the woods - which is actually caused by magical energy leaking from his tomb.', '2025-03-15 18:30:00', 1),
+(2, 'Campaign Villain Ideas', 'Lord Blackthorn is a corrupt noble secretly working with a cult dedicated to the ancient deity Tharizdun. As the respected governor of Westmarch Province, he maintains a public persona of generosity and justice while funneling resources to the cult. His ultimate aim is to locate and unseal the three Void Shards that, when combined, can tear open a gateway for his deity to enter the material plane. He''s charismatic, calculating, and believes the coming age of darkness will elevate him to godhood as reward for his service.
+The Crimson Circle is a mercenary company led by Commander Vex, a former military leader who was disgraced after a battle went terribly wrong under his command. Now he sells his services to the highest bidder, but holds a personal vendetta against the kingdom that cast him out. His company consists of highly trained specialists, each with unique abilities that complement one another in combat. They''re currently employed by Lord Blackthorn but are unaware of his true intentions, believing they''re simply eliminating political rivals.
+The Whispering Lady appears as a beautiful elven woman who can only be seen by those in moments of desperation or grief. She offers comfort and solutions to problems, but each bargain made with her comes with terrible unforeseen consequences. She is actually an aspect of Tharizdun, seeking to create chaos and suffering to weaken the barriers between planes. Her true form is a shifting mass of shadows with glowing violet eyes. Several NPCs the party has already met have made deals with her, explaining their recent strange behaviors.', '2025-03-16 10:15:00', 1),
+(3, 'Next Session Outline', 'The town of Millbrook''s harvest celebration will be interrupted by mysterious disappearances of several children. The festivities include traditional games like apple bobbing, pie eating contests, and an archery competition the party can participate in. As night falls and lanterns are lit around the town square, screams will be heard from the northern edge of town, where a child was last seen being dragged into the forest by a shadowy figure.
+Investigation will reveal strange tracks leading into the forest - not quite human, not quite animal. Townsfolk will share stories of similar disappearances fifty years ago, solved by a now-deceased hunter named Goren Wolfbane. His daughter, Eliza, still lives in a cabin at the edge of town and possesses her father''s journal which contains clues about the creature - a Changeling that feeds on youth and innocence to maintain its disguise. The creature has been posing as kindly traveler staying at the local inn.
+The party must track the creature to its lair in an abandoned mine shaft where they''ll find the missing children in a trance-like state, having their life force slowly drained. The Changeling will attempt to bargain for its freedom, offering ancient knowledge or magical secrets. If defeated, the children will recover, but one may remain changed by the experience, occasionally speaking prophecies in a language only the party''s wizard can partially understand - providing hooks to future adventures involving the weakening planar boundaries.', '2025-03-16 14:20:00', 1),
+(4, 'Legendary Artifacts', 'The Orb of Zephyr is said to be hidden within the Storm Peaks, a treacherous mountain range where violent thunderstorms rage perpetually. According to ancient texts in the Great Library of Astoria, the orb was created by an archmage who sought to tame the elemental forces of air. When properly attuned, the artifact grants its wielder control over winds and weather, allowing them to summon gusts strong enough to deflect arrows or gentle breezes to fill a ship''s sails. However, legends warn that the orb demands respect - those who use it recklessly may find themselves swept away by the very storms they attempt to command.
+The Everflame Chalice has changed hands countless times throughout history, often bringing both fortune and tragedy to those who possess it. The copper vessel never tarnishes and contains an eternal flame that burns without fuel. It cannot be extinguished by conventional means, though submersion in the tears of a dragon is said to temporarily dim its light. The chalice provides warmth in a fifteen-foot radius and any water placed within it becomes a healing elixir that can cure disease and mend wounds. The Cult of Eternal Fire has sought this artifact for generations, believing it to be the physical manifestation of their deity''s blessing upon the world.
+The Shadowstep Cloak once belonged to Lysander the Unseen, a legendary thief who stole secrets from kings and treasures from dragons. The midnight-black garment seems to absorb light rather than reflect it, and when the hood is drawn up, the wearer can step between shadows as though they were doorways. Each use of this power ages the wearer slightly, taking minutes from their life that can never be restored. The cloak currently resides in the private collection of Baron Redmond, though few know he possesses only a replica - the true artifact was stolen three months ago by an unknown culprit who has been using its power to infiltrate noble households throughout the kingdom.', '2025-03-17 09:45:00', 1),
+(5, 'Political Landscape of Atheria', 'The Kingdom of Verlinden stands as the dominant human realm in central Atheria, ruled by the aging King Edmund II who has no clear heir. The king''s health has been failing for the past year, leading to increased political maneuvering among the five Great Houses who each believe they have legitimate claims to the throne. House Blackwood controls most of the kingdom''s military forces and has been strategically placing loyal commanders in key fortresses. House Silversmith dominates trade and banking, effectively controlling the kingdom''s economy. House Thornfield holds ancestral ties to the royal bloodline through a marriage three generations past. House Oakhart controls the richest agricultural lands and could potentially starve the capital if provoked. House Wavecrest commands the kingdom''s naval forces and has recently been strengthening alliances with neighboring maritime powers.
+Beyond Verlinden''s borders lies the Elven Conclave of Illyria, an ancient confederation of woodland realms unified under High Sentinel Thaelorin. Relations between Verlinden and Illyria have grown increasingly strained after human logging operations encroached upon sacred groves near the border. The elves have withdrawn their ambassadors from human lands and there are rumors of elven rangers sabotaging lumber camps. The dwarven kingdom of Khaz-Morad to the east remains neutral in this growing conflict, though they continue to sell weapons to both sides while publicly calling for peaceful resolution.
+The Southern Principalities consist of a dozen small independent city-states that have recently formed a defensive alliance against the expanding Crimson Empire across the sea. These principalities vary greatly in government and culture, but all fear imperial conquest. The most powerful among them, the merchant republic of Venstria, has been secretly funding rebel groups within Imperial territories while publicly maintaining diplomatic relations. The Arcane Collegium, technically independent from all political entities, has grown concerned about the rising tensions and has dispatched observers to all major capitals. Their true motivation remains unclear, though some suspect they seek to prevent any conflict that might threaten ancient magical sites scattered throughout the continent.', '2025-03-18 11:30:00', 1),
+(6, 'The Lost City of Aethrazir', 'Buried beneath the shifting sands of the Crimson Desert lies Aethrazir, once the jewel of the ancient Nhazir civilization. According to fragmentary records in the Royal Archives, the city was sealed by its own inhabitants some 1,200 years ago in a desperate attempt to contain a magical catastrophe. The exact nature of this catastrophe remains unclear - some texts refer to a plague that transformed citizens into crystalline statues, while others mention a tear in the fabric of reality that allowed entities from the Far Realm to enter our world. Whatever the truth, the city''s location was systematically erased from maps, and powerful aversion enchantments were placed around the region to discourage exploration.
+Recent earthquakes have revealed portions of what appears to be a massive domed structure of opalescent stone approximately 60 miles northeast of the Caravanserai of Seven Winds. The renowned explorer Cassandra Vale has identified these ruins as potentially being the legendary entrance to Aethrazir based on astronomical alignments and architectural similarities to confirmed Nhazir remnants. Her expedition departed three months ago but was scheduled to return after six weeks. No word has been received from Vale or her team, but desert nomads report strange lights and sounds emanating from the excavation site during the new moon.
+The Nhazir were known for their unparalleled mastery of crystalline magic - the art of infusing gemstones with arcane energy to create devices of extraordinary power. If Aethrazir has indeed been found, it may contain technological and magical innovations lost to modern civilization. Of particular interest is the rumored Central Spire, said to house the Astrolabe of Convergence, a device that could allegedly predict celestial events with perfect accuracy and open portals to distant locations. However, any expedition must exercise extreme caution, as the magical defenses and containment measures would still be active, and whatever calamity the ancient Nhazir sought to contain may likewise remain a threat.', '2025-03-19 16:20:00', 1),
+(7, 'Rival Adventuring Party: The Silver Ravens', 'The Silver Ravens have established themselves as one of the most effective and flamboyant adventuring companies in the realm, often arriving just before our heroes to claim glory and rewards. Led by the charismatic half-elf bard Lysander Brightwood, they have a flair for the dramatic and always ensure local bards document their exploits in song. Lysander dual-wields enchanted short swords and is known for composing ballads of his victories while still engaged in combat. His public persona is one of good-natured rivalry, but in private, he harbors deep insecurity and fears being forgotten or overshadowed - driving him to increasingly dangerous stunts to maintain his reputation.
+The group''s tactical genius is Zora Flameheart, a tiefling war wizard specializing in battlefield control and devastating fire magic. Orphaned during religious purges in the northern provinces, Zora views her companions as the family she never had and is fiercely protective of them. Though she presents a cold and calculating demeanor, she secretly collects children''s dolls, keeping one from each town they save as mementos of the normal childhood she never experienced. Zora and Lysander have a complicated romantic history that occasionally compromises their professional judgment during critical missions.
+The moral compass of the Ravens is Thaddeus Ironheart, a human paladin devoted to Tyr who frequently finds himself apologizing for his companions'' excesses. He joined the group after they saved his monastery from a demon incursion, feeling that his deity had called him to guide these talented but impulsive individuals toward righteous action. Unknown to his companions, Thaddeus suffers from prophetic nightmares showing a great darkness consuming the world - a darkness he believes only the combined efforts of all adventurers, including both the Ravens and the player''s party, can prevent. He has been trying to orchestrate an alliance between the groups, but Lysander''s competitive nature has thus far thwarted his efforts. The Silver Ravens also include Grunk the "Civilized" Orc artificer and Willow Thorngage, a halfling ranger with her companion wolverine, Snapper.', '2025-03-20 20:10:00', 1),
+(8, 'The Planar Convergence Theory', 'According to the ancient texts recovered from the Celestial Library, our material plane exists within a complex cosmic arrangement often visualized as concentric spheres. The innermost spheres contain the elemental planes - Fire, Water, Earth, and Air - while the outermost spheres encompass the divine realms and the Far Realm. Between these lie the transitive planes such as the Ethereal and Shadow planes. Conventional wisdom holds that these planes remain separated by metaphysical barriers that prevent unrestricted interaction, with planar travel requiring considerable magical power and precise arcane formulations to breach these natural boundaries.
+However, the controversial scholar Magister Velanora has proposed what she calls the "Planar Convergence Theory" based on her observations of increasing planar phenomena over the past decade. According to Velanora''s calculations, the planes naturally shift closer to one another in a cosmic cycle lasting approximately 7,000 years. During the convergence peak, which she believes will occur within the next three years, the barriers between planes will thin dramatically. Minor manifestations are already being reported: spontaneous elemental effects, ghostly apparitions becoming visible without magical aid, and dreams that seem to draw from collective memories or future events. The Magisterium has dismissed Velanora''s theories as sensationalist conjecture, particularly her assertion that the last convergence coincided with the Calamity that ended the Age of Wonders.
+If Velanora''s predictions prove accurate, the coming convergence would have profound implications for all forms of magic. Spells drawing power from other planes would become more potent but potentially more unstable. Summoning rituals would require fewer components but might result in entities arriving with greater independence from their summoner''s control. Most concerning are the planar rifts that could form in locations with historical magical significance, creating permanent connections to other realms unless properly sealed. The Arcane Collegium has reluctantly established a monitoring network at key ley line intersections, though they publicly maintain this is merely a precautionary measure rather than an endorsement of what they term "convergence hysteria" among the common folk.', '2025-03-21 13:45:00', 1);
 
 -- Characters
 INSERT INTO `character` 
-(`character_id`, `first_name`, `last_name`, `age`, `alignment`, `level`, `appereance`, `lore`, `personality`, `user_id`) 
+(`character_id`, `first_name`, `last_name`, `age`, `alignment`, `level`, `appearance`, `lore`, `personality`, `user_id`) 
 VALUES
 (1, 'Thokk', 'Mountaincrusher', 25, 'Chaotic Neutral', 1, 'A stout dwarf with a wild red beard and numerous battle scars. His arms are as thick as tree trunks.', 'Born in the Iron Mountains, Thokk was raised to be a miner but always felt a calling for adventure. After saving his clan from a goblin raid, he embraced his inner rage and set out to test his might.', 'Loud, boisterous, and always ready for a fight or a drinking contest. Despite his rough exterior, he values loyalty above all else.', 2),
 (2, 'Lilith', 'Shadowstep', 32, 'Chaotic Good', 1, 'A lithe elf with midnight black hair and piercing green eyes. She moves with calculated grace and always keeps her face partially hidden.', 'Orphaned at a young age, Lilith survived on the streets by becoming a skilled pickpocket. She now uses her talents to help the downtrodden, stealing from corrupt nobles to aid the poor.', 'Suspicious of authority but fiercely protective of innocents. She rarely speaks about her past and prefers to work alone, though she''s beginning to value having allies.', 3),
@@ -87,26 +104,12 @@ INSERT INTO money (money_id, platinum, gold, silver, copper, character_id) VALUE
 (2, 0, 15, 10, 50, 2),
 (3, 0, 25, 15, 10, 3),
 (4, 0, 20, 8, 30, 4),
-(5, 0, -2, 20, 12, 5),
+(5, 0, 2, 20, 12, 5),
 (6, 1, 50, 25, 40, 6), -- More money for level 5 characters
 (7, 2, 75, 30, 15, 7),
 (8, 3, 120, 40, 25, 8),
 (9, 2, 85, 15, 30, 9),
 (10, 1, 65, 35, 50, 10);
-
--- Stats
-INSERT INTO stats (stats_id, DEXTERITY, INTELLIGENCE, STRENGTH, CHARISMA, CONSTITUTION, WISDOM, character_id) 
-VALUES
-(1, 12, 8, 16, 10, 14, 13, 1),
-(2, 16, 14, 10, 12, 10, 8, 2),
-(3, 10, 16, 8, 14, 12, 13, 3),
-(4, 10, 12, 16, 14, 12, 8, 4),
-(5, 14, 10, 8, 16, 12, 13, 5),
-(6, 14, 12, 10, 8, 14, 16, 6),
-(7, 14, 10, 15, 8, 16, 12, 7),
-(8, 18, 14, 10, 12, 12, 8, 8),
-(9, 12, 18, 8, 16, 10, 14, 9),
-(10, 12, 10, 18, 16, 14, 8, 10);
 
 -- Species Features
 INSERT INTO species_feature (species_feature_id, name, description) VALUES
@@ -179,47 +182,15 @@ VALUES
 (10, 5);
 
 -- Character Skills
-INSERT INTO `character_has_skill` (character_id, skill_id, proficiency) VALUES
+INSERT INTO `character_has_skill` (`character_id`, `skill_id`, `proficiency`) VALUES
 -- Thokk Level 1
 (1, 4, 1), -- Athletics
 (1, 8, 1), -- Intimidation
 -- Lilith Level 1
-(2, 1, 1), -- Acrobatics
-(2, 16, 1), -- Sleight of Hand
-(2, 17, 1), -- Stealth
--- Alaric Level 1
-(3, 3, 1), -- Arcana
-(3, 6, 1), -- History
--- Gareth Level 1
-(4, 4, 1), -- Athletics
-(4, 15, 1), -- Religion
--- Melody Level 1
-(5, 5, 1), -- Deception
-(5, 13, 1), -- Performance
-(5, 14, 1), -- Persuasion
--- Thokk Level 5
-(6, 4, 1), -- Athletics
-(6, 8, 1), -- Intimidation
-(6, 11, 1), -- Nature
--- Lilith Level 5
-(7, 1, 1), -- Acrobatics
-(7, 5, 1), -- Deception
-(7, 16, 1), -- Sleight of Hand
-(7, 17, 1), -- Stealth
--- Alaric Level 5
-(8, 3, 1), -- Arcana
-(8, 6, 1), -- History
-(8, 9, 1), -- Investigation
-(8, 15, 1), -- Religion
--- Gareth Level 5
-(9, 4, 1), -- Athletics
-(9, 14, 1), -- Persuasion
-(9, 15, 1), -- Religion
--- Bramble Level 5
-(10, 2, 1), -- Animal Handling
-(10, 11, 1), -- Nature
-(10, 12, 1), -- Perception
-(10, 18, 1); -- Survival
+(8, 1, 1), -- Acrobatics
+(8, 16, 1), -- Sleight of Hand
+(8, 17, 1); -- Stealth
+
 
 INSERT INTO `species_has_species_feature` (`species_id`, `species_feature_id`)
 VALUE
@@ -308,4 +279,14 @@ VALUE
 (5, 3),
 (6, 6),
 (6, 3);
+
+INSERT INTO character_has_stats (character_id, stat_name, value) 
+VALUES 
+(1, 'strength', 10),
+(8, 'strength', 11),
+(8, 'dexterity', 20),
+(8, 'constitution', 12),
+(8, 'intelligence', 11),
+(8, 'charisma', 11),
+(8, 'wisdom', 18);
 

@@ -19,7 +19,7 @@ const Class = connection.define(
       allowNull: false,
     },
     hit_die: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     main_stat: {

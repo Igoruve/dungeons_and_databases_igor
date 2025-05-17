@@ -11,16 +11,16 @@ router.get("/", classFeatureAPIController.getAll);
 router.get("/:id", classFeatureAPIController.getByID);
 
 //creamos una clase
-router.post("/", isLoggedInAPI, isMaster, classFeatureAPIController.create);
+router.post("/", /* isLoggedInAPI, isMaster, */ classFeatureAPIController.create);
 
 //actualizamos una clase
-router.put("/:id", isLoggedInAPI, isMaster, classFeatureAPIController.edit);
+router.put("/:id", /* isLoggedInAPI, isMaster, */ classFeatureAPIController.edit);
 
 //borramos una clase
 router.delete(
   "/:id",
-  isLoggedInAPI,
-  isMaster,
+/*   isLoggedInAPI,
+  isMaster, */
   classFeatureAPIController.remove
 );
 
