@@ -40,12 +40,12 @@ Instala las dependencias:
 
 npm install
 Crea un archivo .env con las siguientes variables:
-PORT=3000
-DB_HOST=localhost
-DB_USER=tu_usuario_mysql
-DB_PASSWORD=tu_contraseña
-DB_NAME=nombre_de_tu_base_de_datos
-JWT_SECRET=tu_secreto_jwt
+- PORT=3000
+- DB_HOST=localhost
+- DB_USER=tu_usuario_mysql
+- DB_PASSWORD=tu_contraseña
+- DB_NAME=nombre_de_tu_base_de_datos
+- JWT_SECRET=tu_secreto_jwt
 Ejecuta las migraciones (si aplica) y levanta el servidor:
 
 npm start
